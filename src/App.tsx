@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBarContainer from "./containers/NavBarContainer";
 import Home from "./components/Home";
 import FooterContainer from "./containers/FooterContainer";
+import NewUserForm from "./components/user/NewUserForm";
+import UserPreferences from "./components/user/UserPreferences";
 
 function App() {
   return (
@@ -14,7 +16,9 @@ function App() {
           <NavBarContainer />
         </nav>
         <div className="main-container mt-12 mb-10 border-solid border-4 border-black">
-          <Route path="/" component={Home} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/users/new" component={NewUserForm} />
+          <Route exact path="/users/preferences" component={UserPreferences} />
         </div>
         <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
           <FooterContainer />

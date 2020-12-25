@@ -1,12 +1,17 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 export default class NavBarContainer extends React.Component {
   render(): React.ReactNode {
     return (
       <div className="grid grid-cols-6 items-center h-full">
-        <div className="bg-blue-500">Barker</div>
+        <NavLink to="/">
+          <div className="bg-blue-500">Barker</div>
+        </NavLink>
         <div className="col-span-3 flex flex-row justify-around p-2">
-          <div className="bg-blue-500">Nav 1</div>
+          <NavLink to="/users/preferences">
+            <div className="bg-blue-500">User Preferences</div>
+          </NavLink>
           <div className="bg-blue-500">Nav 2</div>
           <div className="bg-blue-500">Nav 3</div>
         </div>
