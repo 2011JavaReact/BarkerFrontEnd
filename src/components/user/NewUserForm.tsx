@@ -1,10 +1,12 @@
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
+import UserPreferences from "./UserPreferences";
 
 export default class NewUserForm extends React.Component {
   state = {
     redirect: false,
+    userId: "",
     user: {
       userName: "",
       email: "",
@@ -25,13 +27,22 @@ export default class NewUserForm extends React.Component {
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
     console.log(this.state);
-    Axios.post("http://localhost:8080/users", this.state.user);
-    this.setState({ redirect: true });
+    Axios.post("http://localhost:8080/users", this.state.user).then((resp) => {
+      console.log(resp.data);
+      this.setState({ userId: resp.data.id, redirect: true });
+    });
   };
 
   render(): React.ReactNode {
     if (this.state.redirect) {
-      return <Redirect to="/users/preferences" />;
+      return (
+        <Redirect
+          to={{
+            pathname: "/users/preferences",
+            state: { userId: this.state.userId },
+          }}
+        />
+      );
     } else {
       return (
         <div className="flex h-screen justify-center">
@@ -73,6 +84,7 @@ export default class NewUserForm extends React.Component {
               Create a Shelter Account Instead
             </Link>
           </div>
+          {/* <UserPreferences userId={this.state.userId} /> */}
         </div>
       );
     }
