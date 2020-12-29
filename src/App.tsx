@@ -12,6 +12,7 @@ import Home from "./components/Home";
 import FooterContainer from "./containers/FooterContainer";
 import NewUserForm from "./components/user/NewUserForm";
 import UserPreferences from "./components/user/UserPreferences";
+import NewDogForm from "./components/dog/NewDogForm";
 
 class App extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class App extends React.Component {
               path="/users/preferences"
               render={(routerProps) => <UserPreferences {...routerProps} />}
             />
+            <Route exact path="/dog" component={ NewDogForm }/>
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
             <FooterContainer />
