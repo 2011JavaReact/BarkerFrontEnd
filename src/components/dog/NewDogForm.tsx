@@ -37,7 +37,7 @@ export default class NewDogForm extends React.Component {
     handleSubmit = ( event: React.FormEvent<HTMLElement> ): void => {
         event.preventDefault();
         console.log(this.state);
-        Axios.post("http://localhost:8080/dogs", this.state.dog).then((resp) => {
+        Axios.post("http://localhost:8080/shelters/" + this.state.userId + "/dogs", this.state.dog).then((resp) => {
             console.log(resp.data);
             this.setState({ dogId: resp.data.id, redirect: true});
         });
@@ -126,7 +126,7 @@ export default class NewDogForm extends React.Component {
                             </select>
                             <div>Bio</div>
                             <button
-                                className="text-2xl rounded-md py-2 px-2 bg-blue-300"
+                                className="text-2xl rounded-md py-2 px-2 mt-5 mb-20 bg-blue-300"
                                 type="submit"
                             >Create Dog</button>
                         </form>

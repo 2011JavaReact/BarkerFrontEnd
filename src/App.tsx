@@ -22,7 +22,7 @@ class App extends React.Component {
           <nav className="fixed inset-x-0 top-0 h-12 bg-gray-500">
             <NavBarContainer />
           </nav>
-          <div className="main-container mt-12 mb-10 border-solid border-4 border-black">
+          <div className="main-container h-screen mt-12 mb-10">
             <Route exact path="/" component={Home} />
             <Route exact path="/users/new" component={NewUserForm} />
             <Route
