@@ -23,11 +23,7 @@ export default class NavBarContainer extends React.Component<IProps> {
       this.setState({user: newName});
     }
 
-  changeLogin(newName: string) {
-    this.setState({ user: newName });
-  }
-
-  render() {
+    render() {
     //Three Conditions.
     //1. Not logged in.
     //2. Logged in as User.
@@ -43,7 +39,6 @@ export default class NavBarContainer extends React.Component<IProps> {
           <div className="col-span-3 flex flex-row justify-around p-2">
             <NavLink to="/users/modify">
               <div className="bg-blue-500">Update User Preferences</div>
-
             </NavLink>
             <div className="bg-blue-500">Swipe/NI</div>
             <div className="bg-blue-500">Liked Dogs/NI</div>
@@ -55,6 +50,7 @@ export default class NavBarContainer extends React.Component<IProps> {
             <button className="rounded-md bg-white" onClick={this.props.onLogout}>LOGOUT</button>
 
             </NavLink>
+          </div>
           </div>
           );
       }
@@ -75,7 +71,7 @@ export default class NavBarContainer extends React.Component<IProps> {
                 className="rounded-md bg-white"
                 onClick={this.props.onLogout}
               >
-                LOGOUT/NI
+                LOGOUT
               </button>
             </NavLink>
           </div>

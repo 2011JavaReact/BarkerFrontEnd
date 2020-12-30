@@ -11,9 +11,8 @@ export default class LoginForm extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
   }
-
-
       state = {
+          placeholderValue: "Email",
           redirect: false,
           userType: "User",
           user: {
@@ -35,13 +34,13 @@ export default class LoginForm extends React.Component<IProps> {
   handleSelect = () : void =>
   {
     this.setState({userType: (this.state.userType == "User") ? "Shelter" : "User"});
+    this.setState({placeholderValue: (this.state.placeholderValue == "Email") ? "Username" : "Email"});
   }
 
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
-
+    event.preventDefault();
     if(this.state.userType == "User")
     {
-      event.preventDefault();
       console.log(this.state);
       Axios.post("http://localhost:8080/login", this.state.user).then((resp) => {
         console.log(resp.data);
@@ -51,7 +50,13 @@ export default class LoginForm extends React.Component<IProps> {
     }
     else if(this.state.userType == "Shelter")
     {
-      alert("Shelter login not implemented yet");
+      Axios.post("http://localhost:8080/shelterLogin", {shelterName: this.state.user.email, shelterPassword: this.state.user.password})
+      .then((resp) => {
+        console.log(resp.data);
+        this.setState({redirect: true });
+       this.props.onLogin(resp.data.shelterName, resp.data.id, "Shelter");
+      }).catch(err => {alert("Invalid login")});
+
     }
   };
 
@@ -74,7 +79,7 @@ export default class LoginForm extends React.Component<IProps> {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="text"
                 name="email"
-                placeholder="Email"
+                placeholder={this.state.placeholderValue}
                 onChange={this.handleChange}
                 value={this.state.user.email}
               ></input>

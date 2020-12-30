@@ -65,8 +65,8 @@ class App extends React.Component<IProps, IState> {
     localStorage.clear();
 
 
-  loginShelter(shelterName: string, shelterId: number) {
-    this.setState({ shelterName: shelterName, shelterId: shelterId });
+  //loginShelter(shelterName: string, shelterId: number) {
+    //this.setState({ shelterName: shelterName, shelterId: shelterId });
   }
 
 
@@ -86,13 +86,13 @@ class App extends React.Component<IProps, IState> {
           <div className="main-container h-screen mt-12 mb-10">
             <Route exact path="/" component={Home} />
             <Route exact path="/users/new" component={NewUserForm} />
-            <Route
+            {/* <Route
               exact
               path="/shelters/new"
               render={(routerProps) => (
                 <NewShelterForm {...routerProps} onCreate={this.loginShelter} />
               )}
-            />
+            /> */}
             <Route
               exact
               path="/login"
