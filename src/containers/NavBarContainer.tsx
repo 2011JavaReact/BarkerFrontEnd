@@ -45,7 +45,7 @@ export default class NavBarContainer extends React.Component<IProps> {
             <div className="col-span-2 flex flex-row justify-around p-2">
               <div className="bg-blue-500">{this.props.user}</div>
             <NavLink to="/">
-            <button className="rounded-md bg-white" onClick={this.props.onLogout}>LOGOUT/NI</button>
+            <button className="rounded-md bg-white" onClick={this.props.onLogout}>LOGOUT</button>
             </NavLink>
             </div>
           </div>
