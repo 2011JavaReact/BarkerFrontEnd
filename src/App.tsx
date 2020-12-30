@@ -25,35 +25,48 @@ import ModifyUser from "./components/user/ModifyUser";
 
 interface IProps {}
 
-interface IState {
-  username: string;
-  id: number;
-  shelterName: string;
-  shelterId: number;
+
+interface IState{
+  username: string,
+  id: number,
+  userType: string
+  //shelterName: string;
+  //shelterId: number;
 }
 
 class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
+    if(localStorage.getItem("username") == null)
+    {
+      localStorage.setItem("username", "none");
+      localStorage.setItem("id", "-1");
+      localStorage.setItem("userType", "none");
+    }
     this.state = {
-      username: "none",
-      id: -1,
-      shelterName: "",
-      shelterId: -1,
+
+      username: localStorage.getItem("username")!,
+      id: parseInt(localStorage.getItem("id")!, 10),
+      userType: localStorage.getItem("userType")!
     };
   }
 
-  loginShelter(shelterName: string, shelterId: number) {
-    this.setState({ shelterName: shelterName, shelterId: shelterId });
+  onLogin(newName: string, newId: number, newUserType: string)
+  {
+    this.setState({username: newName, id: newId, userType: newUserType});
+    localStorage.setItem("username", newName);
+    localStorage.setItem("id", newId.toString());
+    localStorage.setItem("userType", newUserType);
   }
 
-  onLogin(newName: string, newId: number) {
-    console.log("user id on login: ", newId);
-    this.setState({ username: newName, id: newId });
-  }
+  onLogout()
+  {
+    this.setState({username: "none", id: -1, userType: "none"});
+    localStorage.clear();
 
-  onLogout() {
-    this.setState({ username: "none", id: -1 });
+
+  //loginShelter(shelterName: string, shelterId: number) {
+    //this.setState({ shelterName: shelterName, shelterId: shelterId });
   }
 
 
@@ -62,21 +75,24 @@ class App extends React.Component<IProps, IState> {
       <Router>
         <div className="App mx-auto text-2xl">
           <nav className="fixed inset-x-0 top-0 h-12 bg-gray-500">
-            <NavBarContainer
-              user={this.state.username}
-              onLogout={this.onLogout.bind(this)}
+
+            <NavBarContainer 
+              userType={this.state.userType}
+              user={this.state.username + ": " + this.state.id}
+              onLogout = {this.onLogout.bind(this)}   
+
             ></NavBarContainer>
           </nav>
           <div className="main-container h-screen mt-12 mb-10">
             <Route exact path="/" component={Home} />
             <Route exact path="/users/new" component={NewUserForm} />
-            <Route
+            {/* <Route
               exact
               path="/shelters/new"
               render={(routerProps) => (
                 <NewShelterForm {...routerProps} onCreate={this.loginShelter} />
               )}
-            />
+            /> */}
             <Route
               exact
               path="/login"
