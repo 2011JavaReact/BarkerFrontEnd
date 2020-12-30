@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 interface IProps{
   user: string;
+  userType: string;
   onLogout: () => void
   //changeLogin: (newName: string) => void;
 }
@@ -11,7 +12,8 @@ export default class NavBarContainer extends React.Component<IProps> {
     constructor(props: IProps) {
       super(props);
       this.state = {
-        user: props.user
+        user: props.user,
+        userType: props.userType
       };
     }
 
@@ -26,7 +28,7 @@ export default class NavBarContainer extends React.Component<IProps> {
     //1. Not logged in. 
     //2. Logged in as User.
     //3. Logged in as Shelter.
-      if(this.props.user == "User")
+      if(this.props.userType == "User")
       {
         return (
           <div className="grid grid-cols-6 items-center h-full">
@@ -49,7 +51,7 @@ export default class NavBarContainer extends React.Component<IProps> {
           </div>
           );
       }
-      else if(this.props.user == "Shelter"){
+      else if(this.props.userType == "Shelter"){
         return (
           <div className="grid grid-cols-6 items-center h-full">
           <NavLink to="/">

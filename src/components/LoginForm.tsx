@@ -3,7 +3,7 @@ import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps{
-    onLogin: (newName: string, id: number) => void
+    onLogin: (newName: string, id: number, newUserType: string) => void
 }
 
 export default class LoginForm extends React.Component<IProps> {
@@ -14,7 +14,7 @@ export default class LoginForm extends React.Component<IProps> {
       state = {
           redirect: false,
           user: {
-            userName: "",
+            email: "",
             password: "",
           },
       }
@@ -28,17 +28,14 @@ export default class LoginForm extends React.Component<IProps> {
     this.setState({ user: newUser });
   };
 
-  //Change this to Login in. Needs error if login unsuccessful
-  //And redirect with this state if successful
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
     console.log(this.state);
-    // Axios.post("http://localhost:8080/users", this.state.user).then((resp) => {
-    //   console.log(resp.data);
-    //   this.setState({ userId: resp.data.id, redirect: true });
-    // });
+    Axios.post("http://localhost:8080/login", this.state.user).then((resp) => {
+      console.log(resp.data);
     this.setState({redirect: true });
-    this.props.onLogin(this.state.user.userName, 1);
+    this.props.onLogin(resp.data.userName, resp.data.id, "User");
+    }).catch(err => {alert("Invalid login")});
   };
 
   render(): React.ReactNode {
@@ -60,16 +57,14 @@ export default class LoginForm extends React.Component<IProps> {
               <input
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="text"
-                ref="username"
-                name="userName"
-                placeholder="Username"
+                name="email"
+                placeholder="Email"
                 onChange={this.handleChange}
-                value={this.state.user.userName}
+                value={this.state.user.email}
               ></input>
               <input
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="password"
-                id="password"
                 name="password"
                 placeholder="Password"
                 onChange={this.handleChange}
