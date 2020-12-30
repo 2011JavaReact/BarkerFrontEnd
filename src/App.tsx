@@ -18,6 +18,7 @@ import UserPreferences from "./components/user/UserPreferences";
 import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
 import NewShelterForm from "./components/shelter/NewShelterForm";
+import ModifyUser from "./components/user/ModifyUser";
 
 interface IProps {}
 
@@ -44,6 +45,7 @@ class App extends React.Component<IProps, IState> {
   }
 
   onLogin(newName: string, newId: number) {
+    console.log("user id on login: ", newId);
     this.setState({ username: newName, id: newId });
   }
 
@@ -83,6 +85,13 @@ class App extends React.Component<IProps, IState> {
               exact
               path="/users/preferences"
               render={(routerProps) => <UserPreferences {...routerProps} />}
+            />
+            <Route
+              exact
+              path="/users/modify"
+              render={(routerProps) => (
+                <ModifyUser {...routerProps} userId={this.state.id} />
+              )}
             />
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">

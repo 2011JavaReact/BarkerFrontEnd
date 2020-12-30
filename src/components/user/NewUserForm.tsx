@@ -53,6 +53,7 @@ export default class NewUserForm extends React.Component {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="text"
                 name="userName"
+                required
                 placeholder="Full Name"
                 onChange={this.handleChange}
                 value={this.state.user.userName}
@@ -61,6 +62,7 @@ export default class NewUserForm extends React.Component {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="email"
                 name="email"
+                required
                 placeholder="Email"
                 onChange={this.handleChange}
                 value={this.state.user.email}
@@ -69,6 +71,7 @@ export default class NewUserForm extends React.Component {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="password"
                 name="password"
+                required
                 placeholder="Password"
                 onChange={this.handleChange}
                 value={this.state.user.password}
@@ -80,11 +83,10 @@ export default class NewUserForm extends React.Component {
                 Sign Up!
               </button>
             </form>
-            <Link className="text-2xl" to="/">
+            <Link className="text-2xl" to="/shelters/new">
               Create a Shelter Account Instead
             </Link>
           </div>
-          {/* <UserPreferences userId={this.state.userId} /> */}
         </div>
       );
     }

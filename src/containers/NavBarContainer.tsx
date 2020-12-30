@@ -31,8 +31,8 @@ export default class NavBarContainer extends React.Component<IProps> {
             <div className="bg-blue-500">Barker</div>
           </NavLink>
           <div className="col-span-3 flex flex-row justify-around p-2">
-            <NavLink to="/users/preferences">
-              <div className="bg-blue-500">User Preferences</div>
+            <NavLink to="/users/modify">
+              <div className="bg-blue-500">Update User Preferences</div>
             </NavLink>
             <div className="bg-blue-500">Swipe/NI</div>
             <div className="bg-blue-500">Liked Dogs/NI</div>

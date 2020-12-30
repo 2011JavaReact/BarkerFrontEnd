@@ -59,6 +59,7 @@ export default class NewShelterForm extends React.Component<IProps> {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="text"
                 name="shelterName"
+                required
                 placeholder="Shelter Name"
                 onChange={this.handleChange}
                 value={this.state.shelter.shelterName}
@@ -67,6 +68,7 @@ export default class NewShelterForm extends React.Component<IProps> {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="text"
                 name="address"
+                required
                 placeholder="Address"
                 onChange={this.handleChange}
                 value={this.state.shelter.address}
@@ -75,6 +77,7 @@ export default class NewShelterForm extends React.Component<IProps> {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="text"
                 name="contactInfo"
+                required
                 placeholder="Contact Information"
                 onChange={this.handleChange}
                 value={this.state.shelter.contactInfo}
@@ -83,6 +86,7 @@ export default class NewShelterForm extends React.Component<IProps> {
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
                 type="password"
                 name="shelterPassword"
+                required
                 placeholder="Password"
                 onChange={this.handleChange}
                 value={this.state.shelter.shelterPassword}
@@ -94,7 +98,7 @@ export default class NewShelterForm extends React.Component<IProps> {
                 Sign Up!
               </button>
             </form>
-            <Link className="text-2xl" to="/">
+            <Link className="text-2xl" to="/users/new">
               Create a User Account Instead
             </Link>
           </div>
