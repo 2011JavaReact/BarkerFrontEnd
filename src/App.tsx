@@ -8,24 +8,31 @@ import {
   Route,
   RouteComponentProps,
   Switch,
-  useHistory
+  useHistory,
 } from "react-router-dom";
 import NavBarContainer from "./containers/NavBarContainer";
 import Home from "./components/Home";
 import FooterContainer from "./containers/FooterContainer";
 import NewUserForm from "./components/user/NewUserForm";
+import NewDogForm from "./components/dog/NewDogForm";
 import UserPreferences from "./components/user/UserPreferences";
+
+
 import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
+import NewShelterForm from "./components/shelter/NewShelterForm";
+import ModifyUser from "./components/user/ModifyUser";
 
-interface IProps{}
+interface IProps {}
+
 
 interface IState{
   username: string,
   id: number,
   userType: string
+  //shelterName: string;
+  //shelterId: number;
 }
-
 
 class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
@@ -37,6 +44,7 @@ class App extends React.Component<IProps, IState> {
       localStorage.setItem("userType", "none");
     }
     this.state = {
+
       username: localStorage.getItem("username")!,
       id: parseInt(localStorage.getItem("id")!, 10),
       userType: localStorage.getItem("userType")!
@@ -55,29 +63,60 @@ class App extends React.Component<IProps, IState> {
   {
     this.setState({username: "none", id: -1, userType: "none"});
     localStorage.clear();
+
+
+  loginShelter(shelterName: string, shelterId: number) {
+    this.setState({ shelterName: shelterName, shelterId: shelterId });
   }
+
 
   render() {
     return (
       <Router>
         <div className="App mx-auto text-2xl">
           <nav className="fixed inset-x-0 top-0 h-12 bg-gray-500">
+
             <NavBarContainer 
               userType={this.state.userType}
               user={this.state.username + ": " + this.state.id}
               onLogout = {this.onLogout.bind(this)}   
+
             ></NavBarContainer>
           </nav>
-          <div className="main-container mt-12 mb-10 border-solid border-4 border-black">
+          <div className="main-container h-screen mt-12 mb-10">
             <Route exact path="/" component={Home} />
             <Route exact path="/users/new" component={NewUserForm} />
-            <Route exact path="/login"   render={(routerProps) => <LoginForm {...routerProps} onLogin = {this.onLogin.bind(this)} /> }  />
+            <Route
+              exact
+              path="/shelters/new"
+              render={(routerProps) => (
+                <NewShelterForm {...routerProps} onCreate={this.loginShelter} />
+              )}
+            />
+            <Route
+              exact
+              path="/login"
+              render={(routerProps) => (
+                <LoginForm {...routerProps} onLogin={this.onLogin.bind(this)} />
+              )}
+            />
             {/* <Route exact path="/logout"   render={(routerProps) => <LoginForm {...routerProps} onLogin = {this.onLogin.bind(this)} /> }  /> */}
             <Route
               exact
               path="/users/preferences"
               render={(routerProps) => <UserPreferences {...routerProps} />}
             />
+
+            <Route
+              exact
+              path="/users/modify"
+              render={(routerProps) => (
+                <ModifyUser {...routerProps} userId={this.state.id} />
+              )}
+            />
+
+            <Route exact path="/dog" component={ NewDogForm }/>
+
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
             <FooterContainer />

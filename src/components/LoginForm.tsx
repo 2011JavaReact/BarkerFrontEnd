@@ -2,14 +2,16 @@ import React, { ReactPropTypes } from "react";
 import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
 
+
 interface IProps{
     onLogin: (newName: string, id: number, newUserType: string) => void
 }
 
 export default class LoginForm extends React.Component<IProps> {
-    constructor(props: IProps) {
-        super(props);
-      }
+  constructor(props: IProps) {
+    super(props);
+  }
+
 
       state = {
           redirect: false,
@@ -19,6 +21,7 @@ export default class LoginForm extends React.Component<IProps> {
             password: "",
           },
       }
+
 
   handleChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -35,6 +38,7 @@ export default class LoginForm extends React.Component<IProps> {
   }
 
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
+
     if(this.state.userType == "User")
     {
       event.preventDefault();
@@ -62,7 +66,6 @@ export default class LoginForm extends React.Component<IProps> {
       );
     } else {
       return (
-          
         <div className="flex h-screen justify-center">
           <div className="m-12 w-30% ">
             <div className="text-3xl">Welcome Bark!</div>
