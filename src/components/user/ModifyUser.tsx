@@ -11,6 +11,7 @@ interface IProps extends RouteComponentProps<any> {
 
 interface IState {
   redirect: boolean;
+  breeds: Array<string> | null;
   user: {
     userId: number;
     userName: string;
@@ -32,6 +33,7 @@ export default class ModifyUser extends React.Component<
 > {
   state = {
     redirect: false,
+    breeds: [],
     user: {
       userId: -1,
       userName: "",
@@ -76,8 +78,19 @@ export default class ModifyUser extends React.Component<
         newUser.energyLevelPreference = resp.data.energyLevelPreference;
 
         this.setState({ user: newUser });
+
+        axios.get("http://localhost:8080/dogs/breeds").then((resp) => {
+          const sortedBreeds = resp.data.sort();
+          this.setState({ breeds: sortedBreeds });
+        });
       });
   }
+
+  breedSelect = () => {
+    return this.state.breeds.map((breed) => {
+      return <option value={breed}>{breed}</option>;
+    });
+  };
 
   handleSubmit = (event: React.FormEvent<HTMLElement>): void | undefined => {
     event.preventDefault();
@@ -141,8 +154,7 @@ export default class ModifyUser extends React.Component<
                     value={this.state.user.breedPreference}
                   >
                     <option value="null">Any</option>
-                    <option value="Golden Retreiver">Golden Retreiver</option>
-                    <option value="Get List from DB">Get List from DB</option>
+                    {this.breedSelect()}
                   </select>
                 </div>
               </div>

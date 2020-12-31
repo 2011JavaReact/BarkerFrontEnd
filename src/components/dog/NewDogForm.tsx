@@ -3,10 +3,14 @@ import { Redirect, Link } from "react-router-dom";
 import Axios from "axios";
 import NewUserForm from "../user/NewUserForm";
 
-export default class NewDogForm extends React.Component {
+interface IProps {
+  shelterId: number;
+}
+
+export default class NewDogForm extends React.Component<IProps> {
   state = {
     redirect: false,
-    shelterId: 1,
+    shelterId: this.props.shelterId,
     dogId: -1,
     dog: {
       name: "",
@@ -99,19 +103,14 @@ export default class NewDogForm extends React.Component {
                 <option value="Female">Female</option>
               </select>
               <div>Breed</div>
-              <select
+              <input
                 className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
                 name="breed"
                 required
                 placeholder="Breed"
-                onChange={this.handleSelect}
+                onChange={this.handleChange}
                 value={this.state.dog.breed}
-              >
-                <option value="">Select</option>
-                <option value="Alaskan Malamute">Alaskan Malamute</option>
-                <option value="Golden Retriever">Golden Retriever</option>
-                <option value="TODO">TODO: GET BREEDS FROM DB.</option>
-              </select>
+              ></input>
               <div>Image Link</div>
               <input
                 className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
