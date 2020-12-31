@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect, Link } from "react-router-dom";
 import Axios from "axios";
-import NewUserForm from "../user/NewUserForm";
 
 export default class NewDogForm extends React.Component {
   state = {
