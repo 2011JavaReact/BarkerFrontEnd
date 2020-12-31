@@ -21,6 +21,7 @@ import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
 import NewShelterForm from "./components/shelter/NewShelterForm";
 import ModifyUser from "./components/user/ModifyUser";
+import ModifyShelter from "./components/shelter/ModifyShelter";
 
 interface IProps {}
 
@@ -95,6 +96,14 @@ class App extends React.Component<IProps, IState> {
                 />
               )}
             />
+            <Route
+              exact
+              path="/shelters/modify"
+              render={(routerProps) => (
+                <ModifyShelter {...routerProps} shelterId={this.state.id} />
+              )}
+            />
+
             <Route
               exact
               path="/login"
