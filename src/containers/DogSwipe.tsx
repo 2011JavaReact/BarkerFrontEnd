@@ -24,6 +24,7 @@ interface dog {
 
 interface IState {
   userId: number;
+  dogImage: string;
   dogArray: Array<dog>;
   currentDog: number;
 }
@@ -34,6 +35,7 @@ export default class DogSwipe extends React.Component<
 > {
   state = {
     userId: 1,
+    dogImage: "",
     dogArray: [],
     currentDog: -1,
   };
@@ -42,18 +44,59 @@ export default class DogSwipe extends React.Component<
     Axios.get(
       "http://localhost:8080/users/" + this.state.userId + "/dogs"
     ).then((resp) => {
-      this.setState({ dogArray: resp.data, currentDog: 0 });
+      this.setState({ dogArray: resp.data });
       console.log(resp.data);
+      this.getDogImage();
     });
   }
 
-  getNextDog = () => {
-    if (this.state.currentDog == 0) {
-      return <DogCard dogObject={this.state.dogArray[0]} />;
-    } else if (this.state.currentDog + 1 < this.state.dogArray.length) {
+  handleLike = (dogId: number) => {
+    Axios.get(
+      "http://localhost:8080/users/" +
+        this.state.userId +
+        "/dogs/" +
+        dogId +
+        "/like"
+    ).then((resp) => {
+      this.getDogImage();
+      this.setState({ currentDog: this.state.currentDog + 1 });
+    });
+  };
+
+  handleDislike = (dogId: number) => {
+    Axios.get(
+      "http://localhost:8080/users/" +
+        this.state.userId +
+        "/dogs/" +
+        dogId +
+        "/dislike"
+    ).then((resp) => {
+      this.getDogImage();
+      this.setState({ currentDog: this.state.currentDog + 1 });
+    });
+  };
+
+  getDogImage = () => {
+    // get random image -TODO: TIE TO SPECIFIC BREED!!!
+
+    Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
+      console.log(resp.data);
+      this.setState({ dogImage: resp.data.message });
+    });
+  };
+
+  getDogCard = () => {
+    if (this.state.dogArray.length > 0) {
       return (
-        <DogCard dogObject={this.state.dogArray[this.state.currentDog + 1]} />
+        <DogCard
+          dogImage={this.state.dogImage}
+          returnLike={this.handleLike}
+          returnDislike={this.handleDislike}
+          dogObject={this.state.dogArray[this.state.currentDog + 1]}
+        />
       );
+    } else {
+      return <p>No Dog</p>;
     }
   };
 
@@ -61,8 +104,10 @@ export default class DogSwipe extends React.Component<
     return (
       <div>
         {console.log(this.state.userId)}
-        <h1>Dog swipe</h1>
-        {this.getNextDog()}
+        <h1>Swipe Through Available Dogs!</h1>
+        <div className="bg-gray-200 p-8 h-screen">
+          <div>{this.getDogCard()}</div>
+        </div>
       </div>
     );
   }
