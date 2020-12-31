@@ -16,6 +16,8 @@ import FooterContainer from "./containers/FooterContainer";
 import NewUserForm from "./components/user/NewUserForm";
 import NewDogForm from "./components/dog/NewDogForm";
 import UserPreferences from "./components/user/UserPreferences";
+import DogCard from "./components/dog/DogCard"
+
 
 import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
@@ -118,6 +120,9 @@ class App extends React.Component<IProps, IState> {
               render={(routerProps) => <UserPreferences {...routerProps} />}
             />
 
+            <Route exact path="/dog" component={ NewDogForm }/>
+            <Route exact path="/dogs" component={ DogCard }/>
+
             <Route
               exact
               path="/users/modify"
@@ -133,6 +138,7 @@ class App extends React.Component<IProps, IState> {
                 <NewDogForm {...routerProps} shelterId={this.state.id} />
               )}
             />
+
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
             <FooterContainer />
