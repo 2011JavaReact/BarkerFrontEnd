@@ -66,7 +66,9 @@ export default class NavBarContainer extends React.Component<IProps> {
             </NavLink>
           </div>
           <div className="col-span-2 flex flex-row justify-around p-2">
-            <div className="bg-blue-500">{this.props.user}</div>
+            <NavLink to="/shelters/modify">
+              <div className="bg-blue-500">{this.props.user}</div>
+            </NavLink>
             <NavLink to="/">
               <button
                 className="rounded-md bg-white"
