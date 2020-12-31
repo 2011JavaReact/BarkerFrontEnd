@@ -34,7 +34,7 @@ export default class DogSwipe extends React.Component<
   IState
 > {
   state = {
-    userId: 1,
+    userId: this.props.userId,
     dogImage: "",
     dogArray: [],
     currentDog: -1,

@@ -18,7 +18,6 @@ import NewDogForm from "./components/dog/NewDogForm";
 import UserPreferences from "./components/user/UserPreferences";
 import DogCard from "./components/dog/DogCard";
 import DogSwipe from "./containers/DogSwipe";
-
 import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
 import NewShelterForm from "./components/shelter/NewShelterForm";
@@ -30,7 +29,10 @@ interface IProps {}
 interface IState {
   username: string;
   id: number;
-
+  userType: string;
+  //shelterName: string;
+  //shelterId: number;
+}
 
 class App extends React.Component<IProps, IState> {
   constructor(props: IProps) {
@@ -117,8 +119,8 @@ class App extends React.Component<IProps, IState> {
               render={(routerProps) => <UserPreferences {...routerProps} />}
             />
 
-            <Route exact path="/dog" component={ NewDogForm }/>
-            <Route exact path="/dogs" component={ DogCard }/>
+            <Route exact path="/dog" component={NewDogForm} />
+            <Route exact path="/dogs" component={DogCard} />
 
             <Route
               exact
@@ -127,7 +129,13 @@ class App extends React.Component<IProps, IState> {
                 <ModifyUser {...routerProps} userId={this.state.id} />
               )}
             />
-
+            <Route
+              exact
+              path="/swipe"
+              render={(routerProps) => (
+                <DogSwipe {...routerProps} userId={this.state.id} />
+              )}
+            />
             <Route
               exact
               path="/dog/new"
@@ -135,7 +143,6 @@ class App extends React.Component<IProps, IState> {
                 <NewDogForm {...routerProps} shelterId={this.state.id} />
               )}
             />
-
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
             <FooterContainer />
