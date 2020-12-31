@@ -24,6 +24,7 @@ import NewShelterForm from "./components/shelter/NewShelterForm";
 import ModifyUser from "./components/user/ModifyUser";
 import ModifyShelter from "./components/shelter/ModifyShelter";
 import ShelterDogs from "./components/shelter/ShelterDogs";
+import LikedDogs from "./components/user/LikedDogs";
 
 interface IProps {}
 
@@ -135,6 +136,13 @@ class App extends React.Component<IProps, IState> {
               path="/swipe"
               render={(routerProps) => (
                 <DogSwipe {...routerProps} userId={this.state.id} />
+              )}
+            />
+            <Route
+              exact
+              path="/liked"
+              render={(routerProps) => (
+                <LikedDogs {...routerProps} userId={this.state.id} />
               )}
             />
             <Route
