@@ -23,6 +23,7 @@ import LoginForm from "./components/LoginForm";
 import NewShelterForm from "./components/shelter/NewShelterForm";
 import ModifyUser from "./components/user/ModifyUser";
 import ModifyShelter from "./components/shelter/ModifyShelter";
+import ShelterDogs from "./components/shelter/ShelterDogs";
 
 interface IProps {}
 
@@ -143,6 +144,14 @@ class App extends React.Component<IProps, IState> {
                 <NewDogForm {...routerProps} shelterId={this.state.id} />
               )}
             />
+
+            <Route
+              exact
+              path="/shelterDogs"
+              render={(routerProps) => (
+                <ShelterDogs {...routerProps} shelterId={this.state.id} />
+              )}
+            /> 
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
             <FooterContainer />
