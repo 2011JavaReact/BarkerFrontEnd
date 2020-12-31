@@ -62,7 +62,9 @@ export default class NavBarContainer extends React.Component<IProps> {
             <div className="bg-blue-500">Barker</div>
           </NavLink>
           <div className="col-span-3 flex flex-row justify-around p-2">
-            <div className="bg-blue-500">My Dogs/NI</div>
+          <NavLink to="/shelterDogs">
+            <div className="bg-blue-500">My Dogs</div>
+            </NavLink>
             <NavLink to="/dog/new">
               <div className="bg-blue-500">Add Dog</div>
             </NavLink>
