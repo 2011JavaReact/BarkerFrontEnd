@@ -3,7 +3,7 @@ import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps {
-  onCreate: (shelterName: string, shelterId: number) => void;
+  onCreate: (newName: string, newId: number, newUserType: string) => void;
 }
 
 export default class NewShelterForm extends React.Component<IProps> {
@@ -30,12 +30,26 @@ export default class NewShelterForm extends React.Component<IProps> {
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
     console.log(this.state);
-    Axios.post("http://localhost:8080/shelters", this.state.shelter).then(
-      (resp) => {
+    Axios.post("http://localhost:8080/shelters", this.state.shelter)
+      .then((resp) => {
         console.log(resp.data);
-        this.setState({ shelterId: resp.data.id, redirect: true });
-      }
-    );
+        this.setState({ shelterId: resp.data.id });
+        console.log(this.state.shelter);
+        Axios.post("http://localhost:8080/shelterLogin", this.state.shelter)
+          .then((resp) => {
+            console.log(resp.data);
+            this.props.onCreate(resp.data.shelterName, resp.data.id, "Shelter");
+            this.setState({ redirect: true });
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("Invalid login");
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Unable to Create Account: Shelter Name must be unique.");
+      });
   };
 
   render(): React.ReactNode {

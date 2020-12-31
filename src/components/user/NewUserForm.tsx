@@ -3,7 +3,11 @@ import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
 import UserPreferences from "./UserPreferences";
 
-export default class NewUserForm extends React.Component {
+interface IProps {
+  onCreate: (newName: string, newId: number, newUserType: string) => void;
+}
+
+export default class NewUserForm extends React.Component<IProps> {
   state = {
     redirect: false,
     userId: "",
@@ -24,13 +28,25 @@ export default class NewUserForm extends React.Component {
     this.setState({ user: newUser });
   };
 
-  handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
+  handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
-    console.log(this.state);
-    Axios.post("http://localhost:8080/users", this.state.user).then((resp) => {
-      console.log(resp.data);
-      this.setState({ userId: resp.data.id, redirect: true });
-    });
+
+    Axios.post("http://localhost:8080/users", this.state.user)
+      .then((resp) => {
+        this.setState({ userId: resp.data.id });
+        Axios.post("http://localhost:8080/login", this.state.user)
+          .then((resp) => {
+            this.setState({ redirect: true });
+            this.props.onCreate(resp.data.userName, resp.data.id, "User");
+          })
+          .catch((err) => {
+            alert("Invalid login");
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("Unable to Create Account: Email Address must be unique.");
+      });
   };
 
   render(): React.ReactNode {
@@ -38,7 +54,7 @@ export default class NewUserForm extends React.Component {
       return (
         <Redirect
           to={{
-            pathname: "/users/preferences",
+            pathname: "/",
             state: { userId: this.state.userId },
           }}
         />
