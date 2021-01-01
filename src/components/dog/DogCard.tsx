@@ -33,19 +33,19 @@ const DogCard: React.FC<IProps> = (props) => {
 
   return (
     // <div className="flex bg-gray-200 p-8 justify-center h-screen max-h-96 align-middle">
-    <div className="flex w-11/12 bg-gradient-to-br from-gray-600 to-purple-600 rounded-xl p-8">
+    <div className="flex w-11/12 bg-gradient-to-br from-gray-600 to-purple-600 rounded-xl max-w-screen-lg mx-auto p-2">
       <div className="flex-none flex w-1/12">
         <button className="content-center" onClick={handleDislike}>
           Growl (Dislike)
         </button>
       </div>
       {/* This is the container for the dog image and information */}
-      <div className="flex-none w-10/12 bg-gradient-to-br from-gray-400 to-purple-400 rounded-xl p-2">
-        <div className="need">
+      <div className="flex-none w-10/12 bg-gradient-to-br from-gray-400 to-purple-400 rounded-xl mx-auto p-2">
+        <div className="mx-auto">
           <img
             src={props.dogImage}
             alt="Dog Photo"
-            className="mx-auto w-3/4 rounded-xl"
+            className="mx-auto w-10/12 rounded-xl"
           />
         </div>
 

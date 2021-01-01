@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../images/barker2.png";
 
 interface IProps {
   user: string;
@@ -31,7 +32,9 @@ export default class NavBarContainer extends React.Component<IProps> {
       return (
         <div className="grid grid-cols-6 items-center h-full">
           <NavLink to="/">
-            <div className="bg-blue-500">Barker</div>
+            <div className="bg-blue-500 w-32 ml-2 p-1">
+              <img src={logo} alt="Barker" />
+            </div>
           </NavLink>
           <div className="col-span-3 flex flex-row justify-around p-2">
             <NavLink to="/users/modify">
@@ -59,11 +62,13 @@ export default class NavBarContainer extends React.Component<IProps> {
       return (
         <div className="grid grid-cols-6 items-center h-full">
           <NavLink to="/">
-            <div className="bg-blue-500">Barker</div>
+            <div className="bg-blue-500 w-32 ml-2 p-1">
+              <img src={logo} alt="Barker" />
+            </div>
           </NavLink>
           <div className="col-span-3 flex flex-row justify-around p-2">
-          <NavLink to="/shelterDogs">
-            <div className="bg-blue-500">My Dogs</div>
+            <NavLink to="/shelterDogs">
+              <div className="bg-blue-500">My Dogs</div>
             </NavLink>
             <NavLink to="/dog/new">
               <div className="bg-blue-500">Add Dog</div>
@@ -88,7 +93,9 @@ export default class NavBarContainer extends React.Component<IProps> {
       return (
         <div className="grid grid-cols-6 items-center h-full">
           <NavLink to="/">
-            <div className="bg-blue-500">Barker</div>
+            <div className="bg-blue-500 w-32 ml-2 p-1">
+              <img src={logo} alt="Barker" />
+            </div>
           </NavLink>
           <div></div>
           <div></div>
