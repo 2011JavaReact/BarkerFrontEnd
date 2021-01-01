@@ -7,3 +7,7 @@
 .main-container {
   height: calc(100vh - 80px);
 }
+
+.active {
+  color: purple;
+}
