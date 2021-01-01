@@ -151,7 +151,7 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.breedPreference}
                   >
-                    <option value="null">Any</option>
+                    <option value="any">Any</option>
                     {this.breedSelect()}
                   </select>
                 </div>
@@ -165,7 +165,7 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.agePreference}
                   >
-                    <option value="null">Any</option>
+                    <option value="any">Any</option>
                     <option value="Puppy">Puppy</option>
                     <option value="Young">1-3 Years</option>
                     <option value="Adult">4-8 Years</option>
@@ -182,7 +182,7 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.sizePreference}
                   >
-                    <option value="null">Any</option>
+                    <option value="any">Any</option>
                     <option value="Small">Under 15 lbs</option>
                     <option value="Medium">15 - 35 lbs</option>
                     <option value="Large">35 - 75 lbs</option>
@@ -199,9 +199,9 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.genderPreference}
                   >
-                    <option value="null">Any</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="any">Any</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
                   </select>
                 </div>
               </div>
@@ -214,7 +214,7 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.goodWithPreference}
                   >
-                    <option value="null">Any</option>
+                    <option value="any">Any</option>
                     <option value="Everyone">Everyone</option>
                     <option value="Kids">Kids</option>
                     <option value="Adults">Adults Only</option>
@@ -231,7 +231,7 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.coatLengthPreference}
                   >
-                    <option value="null">Any</option>
+                    <option value="any">Any</option>
                     <option value="Short">Short</option>
                     <option value="Medium">Medium</option>
                     <option value="Long">Long</option>
@@ -247,7 +247,7 @@ export default class ModifyUser extends React.Component<
                     onChange={this.handleChange}
                     value={this.state.user.energyLevelPreference}
                   >
-                    <option value="null">Any</option>
+                    <option value="any">Any</option>
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
                     <option value="High">High</option>
