@@ -12,7 +12,7 @@ const Home = () => {
           CREATE ACCOUNT
         </button>
       </Link>
-      <div className="bg-gradient-to-r from-red-400 via-purple-400 to-green-400 rounded-xl p-2 m-2">
+      <div className="bg-gradient-to-b from-red-400 via-purple-400 to-green-400 rounded-xl p-2 m-2">
         <p>If you are looking for an awesome dog, you need to be on Barker!</p>
         <p>Barker makes it easy to find your perfect companion.</p>
         <p>
