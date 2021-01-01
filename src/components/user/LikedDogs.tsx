@@ -3,7 +3,7 @@ import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps {
-    shelterId: number;
+    userId: number;
   }
 interface IState{
   dogs: Array<dog>;
@@ -24,7 +24,7 @@ interface dog{
 }
 
 
-export default class ShelterDogs extends React.Component<IProps, IState> {
+export default class LikedDogs extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -33,15 +33,15 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
     this.getDogs();
   }
 
-    editDog = (): void => {
+    unLikeDog = (): void => {
       alert("Not implemented yet");
     }
 
 
     getDogs = (): void => {
-          Axios.get("http://localhost:8080/shelters/" + this.props.shelterId).then((resp) => {
+          Axios.get("http://localhost:8080/users/" + this.props.userId).then((resp) => {
             //console.log(resp.data.dogs);
-            resp.data.dogs.forEach( (value: dog) => {
+            resp.data.likedDogs.forEach( (value: dog) => {
                 //console.log(value.bio);
                 this.state.dogs.push(value);
             })
@@ -62,8 +62,8 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
                 src={image}
                 alt={"Picture Unavailable"}
               />
-              <button className="text-2xl rounded-full py-2 px-2 bg-red-400" onClick={this.editDog}>
-                Edit Dog
+              <button className="text-2xl rounded-full py-2 px-2 bg-red-400" onClick={this.unLikeDog}>
+                Unlike Dog
                 </button>
             <p> ------------------------- </p>
             </div>         
