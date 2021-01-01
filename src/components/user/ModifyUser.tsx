@@ -10,6 +10,7 @@ interface IProps extends RouteComponentProps<any> {
 interface IState {
   redirect: boolean;
   breeds: Array<string> | null;
+  message: string;
   user: {
     userId: number;
     userName: string;
@@ -32,6 +33,7 @@ export default class ModifyUser extends React.Component<
   state = {
     redirect: false,
     breeds: [],
+    message: "",
     user: {
       userId: -1,
       userName: "",
@@ -95,7 +97,8 @@ export default class ModifyUser extends React.Component<
 
     Axios.put("http://localhost:8080/users/update", this.state.user).then(
       (resp) => {
-        this.setState({ redirect: true });
+        this.setState({ message: "User Account Successfully Updated!" });
+        setTimeout(() => this.setState({ redirect: true }), 2000);
       }
     );
   };
@@ -112,157 +115,160 @@ export default class ModifyUser extends React.Component<
       );
     } else {
       return (
-        <div className="flex h-screen justify-center">
-          <div className="m-12 w-30% ">
-            <div className="text-3xl">Update User</div>
-            <form className="flex flex-col" onSubmit={this.handleSubmit}>
-              <div className="flex flex-row justify-between items-center">
-                <div>Name</div>
-                <div>
-                  <input
-                    className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
-                    type="text"
-                    name="userName"
-                    placeholder="Full Name"
-                    onChange={this.handleChange}
-                    value={this.state.user.userName}
-                  ></input>
+        <>
+          <div className="text-green-500 text-4xl">{this.state.message}</div>
+          <div className="flex h-screen justify-center">
+            <div className="m-12 w-30% ">
+              <div className="text-3xl">Update User</div>
+              <form className="flex flex-col" onSubmit={this.handleSubmit}>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Name</div>
+                  <div>
+                    <input
+                      className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
+                      type="text"
+                      name="userName"
+                      placeholder="Full Name"
+                      onChange={this.handleChange}
+                      value={this.state.user.userName}
+                    ></input>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Email</div>
-                <div>
-                  <input
-                    className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    onChange={this.handleChange}
-                    value={this.state.user.email}
-                  ></input>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Email</div>
+                  <div>
+                    <input
+                      className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      onChange={this.handleChange}
+                      value={this.state.user.email}
+                    ></input>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Breed</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="breedPreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.breedPreference}
-                  >
-                    <option value="any">Any</option>
-                    {this.breedSelect()}
-                  </select>
+                <div className="bg-purple-200 flex flex-row justify-between items-center">
+                  <div>Breed</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="breedPreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.breedPreference}
+                    >
+                      <option value="any">Any</option>
+                      {this.breedSelect()}
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Age</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="agePreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.agePreference}
-                  >
-                    <option value="any">Any</option>
-                    <option value="Puppy">Puppy</option>
-                    <option value="Young">1-3 Years</option>
-                    <option value="Adult">4-8 Years</option>
-                    <option value="Senior">9+ Years</option>
-                  </select>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Age</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="agePreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.agePreference}
+                    >
+                      <option value="any">Any</option>
+                      <option value="Puppy">Puppy</option>
+                      <option value="Young">1-3 Years</option>
+                      <option value="Adult">4-8 Years</option>
+                      <option value="Senior">9+ Years</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Size</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="sizePreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.sizePreference}
-                  >
-                    <option value="any">Any</option>
-                    <option value="Small">Under 15 lbs</option>
-                    <option value="Medium">15 - 35 lbs</option>
-                    <option value="Large">35 - 75 lbs</option>
-                    <option value="Ex-Large">75+ lbs</option>
-                  </select>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Size</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="sizePreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.sizePreference}
+                    >
+                      <option value="any">Any</option>
+                      <option value="Small">Under 15 lbs</option>
+                      <option value="Medium">15 - 35 lbs</option>
+                      <option value="Large">35 - 75 lbs</option>
+                      <option value="Ex-Large">75+ lbs</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Gender</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="genderPreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.genderPreference}
-                  >
-                    <option value="any">Any</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
+                <div className="bg-purple-200 flex flex-row justify-between items-center">
+                  <div>Gender</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="genderPreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.genderPreference}
+                    >
+                      <option value="any">Any</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Good With</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="goodWithPreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.goodWithPreference}
-                  >
-                    <option value="any">Any</option>
-                    <option value="Everyone">Everyone</option>
-                    <option value="Kids">Kids</option>
-                    <option value="Adults">Adults Only</option>
-                    <option value="Family">Family Only</option>
-                  </select>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Good With</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="goodWithPreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.goodWithPreference}
+                    >
+                      <option value="any">Any</option>
+                      <option value="Everyone">Everyone</option>
+                      <option value="Kids">Kids</option>
+                      <option value="Adults">Adults Only</option>
+                      <option value="Family">Family Only</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Coat Length</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="coatLengthPreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.coatLengthPreference}
-                  >
-                    <option value="any">Any</option>
-                    <option value="Short">Short</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Long">Long</option>
-                  </select>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Coat Length</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="coatLengthPreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.coatLengthPreference}
+                    >
+                      <option value="any">Any</option>
+                      <option value="Short">Short</option>
+                      <option value="Medium">Medium</option>
+                      <option value="Long">Long</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="flex flex-row justify-between items-center">
-                <div>Energy Level</div>
-                <div>
-                  <select
-                    className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
-                    name="energyLevelPreference"
-                    onChange={this.handleChange}
-                    value={this.state.user.energyLevelPreference}
-                  >
-                    <option value="any">Any</option>
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                  </select>
+                <div className="flex flex-row justify-between items-center">
+                  <div>Energy Level</div>
+                  <div>
+                    <select
+                      className="m-2 p-2 w-60 rounded-md border-solid border-2 border-gray-400 text-left"
+                      name="energyLevelPreference"
+                      onChange={this.handleChange}
+                      value={this.state.user.energyLevelPreference}
+                    >
+                      <option value="any">Any</option>
+                      <option value="Low">Low</option>
+                      <option value="Medium">Medium</option>
+                      <option value="High">High</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <button
-                className="text-2xl rounded-full py-2 px-2 bg-blue-400"
-                type="submit"
-              >
-                Save Updates
-              </button>
-            </form>
+                <button
+                  className="text-2xl rounded-full py-2 px-2 bg-blue-400"
+                  type="submit"
+                >
+                  Save Updates
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
+        </>
       );
     }
   }
