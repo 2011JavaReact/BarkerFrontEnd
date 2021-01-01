@@ -1,5 +1,5 @@
-import React, { ReactPropTypes } from "react";
-import { Redirect, RouteComponentProps, Link } from "react-router-dom";
+import React from "react";
+import { Redirect } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps {
@@ -7,9 +7,9 @@ interface IProps {
 }
 
 export default class LoginForm extends React.Component<IProps> {
-  constructor(props: IProps) {
-    super(props);
-  }
+  // constructor(props: IProps) {
+  //   super(props);
+  // }
   state = {
     placeholderValue: "Email",
     redirect: false,
@@ -31,17 +31,17 @@ export default class LoginForm extends React.Component<IProps> {
 
   handleSelect = (): void => {
     this.setState({
-      userType: this.state.userType == "User" ? "Shelter" : "User",
+      userType: this.state.userType === "User" ? "Shelter" : "User",
     });
     this.setState({
       placeholderValue:
-        this.state.placeholderValue == "Email" ? "Username" : "Email",
+        this.state.placeholderValue === "Email" ? "Username" : "Email",
     });
   };
 
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
-    if (this.state.userType == "User") {
+    if (this.state.userType === "User") {
       console.log(this.state);
       Axios.post("http://localhost:8080/login", this.state.user)
         .then((resp) => {
@@ -52,7 +52,7 @@ export default class LoginForm extends React.Component<IProps> {
         .catch((err) => {
           alert("Invalid login");
         });
-    } else if (this.state.userType == "Shelter") {
+    } else if (this.state.userType === "Shelter") {
       Axios.post("http://localhost:8080/shelterLogin", {
         shelterName: this.state.user.email,
         shelterPassword: this.state.user.password,

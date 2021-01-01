@@ -1,9 +1,7 @@
 import React from "react";
-import { Link, Route, Redirect, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import Axios from "axios";
 import DogCard from "../components/dog/DogCard";
-import { worker } from "cluster";
-import { url } from "inspector";
 
 interface IProps extends RouteComponentProps<any> {
   userId: number;

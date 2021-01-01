@@ -1,15 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import {
-  BrowserRouter,
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  RouteComponentProps,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBarContainer from "./containers/NavBarContainer";
 import Home from "./components/Home";
 import FooterContainer from "./containers/FooterContainer";
@@ -18,7 +9,7 @@ import NewDogForm from "./components/dog/NewDogForm";
 import UserPreferences from "./components/user/UserPreferences";
 import DogCard from "./components/dog/DogCard";
 import DogSwipe from "./containers/DogSwipe";
-import { stringify } from "postcss";
+// import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
 import Logout from "./components/Logout";
 import NewShelterForm from "./components/shelter/NewShelterForm";

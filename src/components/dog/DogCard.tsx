@@ -1,6 +1,4 @@
-import Axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Redirect, Link, RouteComponentProps } from "react-router-dom";
+import React from "react";
 
 interface IProps {
   dogImage: string;
@@ -44,7 +42,7 @@ const DogCard: React.FC<IProps> = (props) => {
         <div className="mx-auto">
           <img
             src={props.dogImage}
-            alt="Dog Photo"
+            alt="Dog"
             className="mx-auto w-10/12 rounded-xl"
           />
         </div>
