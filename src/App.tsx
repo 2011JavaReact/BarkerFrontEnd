@@ -1,15 +1,6 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
-import {
-  BrowserRouter,
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  RouteComponentProps,
-  Switch,
-  useHistory,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBarContainer from "./containers/NavBarContainer";
 import Home from "./components/Home";
 import FooterContainer from "./containers/FooterContainer";
@@ -18,8 +9,9 @@ import NewDogForm from "./components/dog/NewDogForm";
 import UserPreferences from "./components/user/UserPreferences";
 import DogCard from "./components/dog/DogCard";
 import DogSwipe from "./containers/DogSwipe";
-import { stringify } from "postcss";
+// import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
+import Logout from "./components/Logout";
 import NewShelterForm from "./components/shelter/NewShelterForm";
 import ModifyUser from "./components/user/ModifyUser";
 import ModifyShelter from "./components/shelter/ModifyShelter";
@@ -78,66 +70,78 @@ class App extends React.Component<IProps, IState> {
             ></NavBarContainer>
           </nav>
           <div className="main-container h-screen mt-12 mb-10">
-            <Route exact path="/" component={Home} />
-            <Route
-              exact
-              path="/users/new"
-              render={(routerProps) => (
-                <NewUserForm
-                  {...routerProps}
-                  onCreate={this.onLogin.bind(this)}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/shelters/new"
-              render={(routerProps) => (
-                <NewShelterForm
-                  {...routerProps}
-                  onCreate={this.onLogin.bind(this)}
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/shelters/modify"
-              render={(routerProps) => (
-                <ModifyShelter {...routerProps} shelterId={this.state.id} />
-              )}
-            />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route
+                exact
+                path="/users/new"
+                render={(routerProps) => (
+                  <NewUserForm
+                    {...routerProps}
+                    onCreate={this.onLogin.bind(this)}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/shelters/new"
+                render={(routerProps) => (
+                  <NewShelterForm
+                    {...routerProps}
+                    onCreate={this.onLogin.bind(this)}
+                  />
+                )}
+              />
+              <Route
+                exact
+                path="/shelters/modify"
+                render={(routerProps) => (
+                  <ModifyShelter {...routerProps} shelterId={this.state.id} />
+                )}
+              />
 
-            <Route
-              exact
-              path="/login"
-              render={(routerProps) => (
-                <LoginForm {...routerProps} onLogin={this.onLogin.bind(this)} />
-              )}
-            />
-            {/* <Route exact path="/logout"   render={(routerProps) => <LoginForm {...routerProps} onLogin = {this.onLogin.bind(this)} /> }  /> */}
-            <Route
-              exact
-              path="/users/preferences"
-              render={(routerProps) => <UserPreferences {...routerProps} />}
-            />
+              <Route
+                exact
+                path="/login"
+                render={(routerProps) => (
+                  <LoginForm
+                    {...routerProps}
+                    onLogin={this.onLogin.bind(this)}
+                  />
+                )}
+              />
+              <Route exact path="/logout" component={Logout} />
+              {/* <Route exact path="/logout"   render={(routerProps) => <LoginForm {...routerProps} onLogin = {this.onLogin.bind(this)} /> }  /> */}
+              <Route
+                exact
+                path="/users/preferences"
+                render={(routerProps) => <UserPreferences {...routerProps} />}
+              />
 
-            <Route exact path="/dog" component={NewDogForm} />
-            <Route exact path="/dogs" component={DogCard} />
+              <Route exact path="/dog" component={NewDogForm} />
+              <Route exact path="/dogs" component={DogCard} />
 
-            <Route
-              exact
-              path="/users/modify"
-              render={(routerProps) => (
-                <ModifyUser {...routerProps} userId={this.state.id} />
-              )}
-            />
-            <Route
-              exact
-              path="/swipe"
-              render={(routerProps) => (
-                <DogSwipe {...routerProps} userId={this.state.id} />
-              )}
-            />
+              <Route
+                exact
+                path="/users/modify"
+                render={(routerProps) => (
+                  <ModifyUser {...routerProps} userId={this.state.id} />
+                )}
+              />
+              <Route
+                exact
+                path="/swipe"
+                render={(routerProps) => (
+                  <DogSwipe {...routerProps} userId={this.state.id} />
+                )}
+              />
+              <Route
+                exact
+                path="/dog/new"
+                render={(routerProps) => (
+                  <NewDogForm {...routerProps} shelterId={this.state.id} />
+                )}
+              />
             <Route
               exact
               path="/liked"
@@ -145,21 +149,14 @@ class App extends React.Component<IProps, IState> {
                 <LikedDogs {...routerProps} userId={this.state.id} />
               )}
             />
-            <Route
-              exact
-              path="/dog/new"
-              render={(routerProps) => (
-                <NewDogForm {...routerProps} shelterId={this.state.id} />
-              )}
-            />
-
-            <Route
-              exact
-              path="/shelterDogs"
-              render={(routerProps) => (
-                <ShelterDogs {...routerProps} shelterId={this.state.id} />
-              )}
-            /> 
+              <Route
+                exact
+                path="/shelterDogs"
+                render={(routerProps) => (
+                  <ShelterDogs {...routerProps} shelterId={this.state.id} />
+                )}
+              />
+            </Switch>
           </div>
           <footer className="fixed inset-x-0 bottom-0 h-8 bg-blue-500">
             <FooterContainer />

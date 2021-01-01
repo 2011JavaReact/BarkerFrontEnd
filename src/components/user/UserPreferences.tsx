@@ -1,8 +1,6 @@
 import React, { ComponentProps } from "react";
-import { Location } from "history";
-import { Link, Route, Redirect, RouteComponentProps } from "react-router-dom";
+import { Link, Redirect, RouteComponentProps } from "react-router-dom";
 import Axios from "axios";
-import { StaticContext } from "react-router";
 
 interface IProps extends RouteComponentProps<any> {
   userId: string;

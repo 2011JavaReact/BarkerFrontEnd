@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Route, Redirect, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 import Axios from "axios";
 import DogCard from "../components/dog/DogCard";
 
@@ -36,8 +36,23 @@ export default class DogSwipe extends React.Component<
   state = {
     userId: this.props.userId,
     dogImage: "",
-    dogArray: [],
-    currentDog: -1,
+    dogArray: [
+      {
+        adopted: false,
+        age: 0,
+        bio: "",
+        breed: "",
+        energyLevel: "",
+        id: 0,
+        image: "",
+        location: "",
+        name: "",
+        sex: "",
+        sheddingLevel: "",
+        shelterId: 0,
+      },
+    ],
+    currentDog: 0,
   };
 
   componentDidMount() {
@@ -46,7 +61,9 @@ export default class DogSwipe extends React.Component<
     ).then((resp) => {
       this.setState({ dogArray: resp.data });
       console.log(resp.data);
-      this.getDogImage();
+      if (this.state.dogArray.length > 0) {
+        this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
+      }
     });
   }
 
@@ -58,8 +75,9 @@ export default class DogSwipe extends React.Component<
         dogId +
         "/like"
     ).then((resp) => {
-      this.getDogImage();
+      // this.getDogImage();
       this.setState({ currentDog: this.state.currentDog + 1 });
+      this.getDogObjectReady();
     });
   };
 
@@ -71,41 +89,82 @@ export default class DogSwipe extends React.Component<
         dogId +
         "/dislike"
     ).then((resp) => {
-      this.getDogImage();
+      // this.getDogImage();
       this.setState({ currentDog: this.state.currentDog + 1 });
+      this.getDogObjectReady();
     });
   };
 
-  getDogImage = () => {
+  getDogImage = (dogBreed: string) => {
     // get random image -TODO: TIE TO SPECIFIC BREED!!!
+    const urlArray = dogBreed.split(" ");
+    const newArray: Array<string> = [];
 
-    Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
-      console.log(resp.data);
-      this.setState({ dogImage: resp.data.message });
-    });
+    for (let i = urlArray.length - 1; i >= 0; i--) {
+      newArray.push(urlArray[i].toLowerCase());
+    }
+
+    Axios.get(
+      "https://dog.ceo/api/breed/" + newArray.join("-") + "/images/random"
+    )
+      .then((resp) => {
+        console.log(resp.data);
+        this.setState({ dogImage: resp.data.message });
+        // this.setState({ currentDog: (this.state.currentDog += 1) });
+      })
+      .catch((err) => {
+        Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
+          console.log(resp.data);
+          this.setState({ dogImage: resp.data.message });
+          // this.setState({ currentDog: (this.state.currentDog += 1) });
+        });
+      });
+  };
+
+  getDogObjectReady = () => {
+    if (
+      this.state.currentDog + 1 < this.state.dogArray.length &&
+      this.state.dogArray.length > 0
+    ) {
+      this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
+    } else {
+      return (
+        <p>
+          No more dogs available. Review your "liked" dogs or check back later
+          to review additional dogs.
+        </p>
+      );
+    }
   };
 
   getDogCard = () => {
-    if (this.state.dogArray.length > 0) {
+    if (
+      this.state.dogArray.length > 0 &&
+      this.state.currentDog < this.state.dogArray.length
+    ) {
       return (
         <DogCard
           dogImage={this.state.dogImage}
           returnLike={this.handleLike}
           returnDislike={this.handleDislike}
-          dogObject={this.state.dogArray[this.state.currentDog + 1]}
+          dogObject={this.state.dogArray[this.state.currentDog]}
         />
       );
     } else {
-      return <p>No Dog</p>;
+      return (
+        <p>
+          No more dogs available. Review your "liked" dogs or check back later
+          to review additional dogs.
+        </p>
+      );
     }
   };
 
   render() {
     return (
       <div>
-        {console.log(this.state.userId)}
-        <h1>Swipe Through Available Dogs!</h1>
-        <div className="bg-gray-200 p-8 h-screen">
+        <div className="bg-gray-200 p-4 h-screen mx-auto">
+          <h1>Swipe Through Available Dogs!</h1>
           <div>{this.getDogCard()}</div>
         </div>
       </div>

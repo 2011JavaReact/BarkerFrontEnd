@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, RouteComponentProps, Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps {

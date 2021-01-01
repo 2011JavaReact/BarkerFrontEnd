@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, RouteComponentProps, Link } from "react-router-dom";
+import { Redirect, RouteComponentProps } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps extends RouteComponentProps<any> {
