@@ -53,11 +53,18 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
       });
   };
 
+
   render(): React.ReactNode {
     return (
       <div>
-        {this.state.dogs.map(({ name, image, age, sex, adopted }) => (
-          <div>
+
+        {this.state.dogs.length < 1 ? (
+          <p className="text-yellow-400 text-3xl">
+            No Dogs Yet - Select "Add Dog" to add your available dogs!
+          </p>
+        ) : null}
+        {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
+          <div key={id}>
             <p>
               {name}, {age}, {sex}, {adopted.toString()}
             </p>
