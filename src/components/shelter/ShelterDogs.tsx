@@ -36,23 +36,28 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
     alert("Not implemented yet");
   };
 
-
-    getDogs = (): void => {
-          Axios.get("http://54.215.186.163:8080/Barker-api/shelters/" + this.props.shelterId).then((resp) => {
-            //console.log(resp.data.dogs);
-            resp.data.dogs.forEach( (value: dog) => {
-                //console.log(value.bio);
-                this.state.dogs.push(value);
-            })
-            this.setState({dogs: this.state.dogs});
-          }).catch(err => {alert("There was an error getting the dogs")});
-        
-    }
+  getDogs = (): void => {
+    Axios.get(
+      "http://54.215.186.163:8080/Barker-api/shelters/" + this.props.shelterId
+    )
+      .then((resp) => {
+        //console.log(resp.data.dogs);
+        resp.data.dogs.forEach((value: dog) => {
+          //console.log(value.bio);
+          this.state.dogs.push(value);
+        });
+        this.setState({ dogs: this.state.dogs });
+      })
+      .catch((err) => {
+        alert("There was an error getting the dogs");
+      });
+  };
 
 
   render(): React.ReactNode {
     return (
       <div>
+
         {this.state.dogs.length < 1 ? (
           <p className="text-yellow-400 text-3xl">
             No Dogs Yet - Select "Add Dog" to add your available dogs!

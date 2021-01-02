@@ -15,21 +15,20 @@ export default class ModifyShelter extends React.Component<IProps> {
       shelterName: "",
       address: "",
       contactInfo: "",
-      shelterPassword: "",
     },
   };
 
   componentDidMount() {
-    Axios.get("http://54.215.186.163:8080/Barker-api/shelters/" + this.props.shelterId).then(
-      (resp) => {
-        const newShelter: any = { ...this.state.shelter };
-        newShelter.shelterName = resp.data.shelterName;
-        newShelter.address = resp.data.address;
-        newShelter.contactInfo = resp.data.contactInfo;
+    Axios.get(
+      "http://54.215.186.163:8080/Barker-api/shelters/" + this.props.shelterId
+    ).then((resp) => {
+      const newShelter: any = { ...this.state.shelter };
+      newShelter.shelterName = resp.data.shelterName;
+      newShelter.address = resp.data.address;
+      newShelter.contactInfo = resp.data.contactInfo;
 
-        this.setState({ shelter: newShelter });
-      }
-    );
+      this.setState({ shelter: newShelter });
+    });
   }
 
   handleChange = (
@@ -43,13 +42,13 @@ export default class ModifyShelter extends React.Component<IProps> {
 
   handleSubmit = (event: React.FormEvent<HTMLElement>): void | undefined => {
     event.preventDefault();
-    console.log(this.state.shelter);
-    Axios.put("http://54.215.186.163:8080/Barker-api/update", this.state.shelter).then(
-      (resp) => {
-        this.setState({ message: "Shelter Successfully Updated!" });
-        setTimeout(() => this.setState({ redirect: true }), 2000);
-      }
-    );
+    Axios.put(
+      "http://54.215.186.163:8080/Barker-api/shelters/update",
+      this.state.shelter
+    ).then((resp) => {
+      this.setState({ message: "Shelter Successfully Updated!" });
+      setTimeout(() => this.setState({ redirect: true }), 2000);
+    });
   };
 
   render(): React.ReactNode {

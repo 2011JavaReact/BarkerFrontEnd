@@ -7,9 +7,7 @@ import FooterContainer from "./containers/FooterContainer";
 import NewUserForm from "./components/user/NewUserForm";
 import NewDogForm from "./components/dog/NewDogForm";
 import UserPreferences from "./components/user/UserPreferences";
-import DogCard from "./components/dog/DogCard";
 import DogSwipe from "./containers/DogSwipe";
-// import { stringify } from "postcss";
 import LoginForm from "./components/LoginForm";
 import Logout from "./components/Logout";
 import NewShelterForm from "./components/shelter/NewShelterForm";
@@ -67,7 +65,7 @@ class App extends React.Component<IProps, IState> {
           <nav className="fixed inset-x-0 top-0 h-12 bg-gray-500">
             <NavBarContainer
               userType={this.state.userType}
-              user={this.state.username + ": " + this.state.id}
+              user={this.state.username}
               onLogout={this.onLogout.bind(this)}
             ></NavBarContainer>
           </nav>
@@ -115,16 +113,11 @@ class App extends React.Component<IProps, IState> {
                 )}
               />
               <Route exact path="/logout" component={Logout} />
-              {/* <Route exact path="/logout"   render={(routerProps) => <LoginForm {...routerProps} onLogin = {this.onLogin.bind(this)} /> }  /> */}
               <Route
                 exact
                 path="/users/preferences"
                 render={(routerProps) => <UserPreferences {...routerProps} />}
               />
-
-              {/* <Route exact path="/dog" component={NewDogForm} />
-              <Route exact path="/dogs" component={DogCard} /> */}
-
               <Route
                 exact
                 path="/users/modify"

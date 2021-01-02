@@ -30,7 +30,6 @@ export default class NavBarContainer extends React.Component<IProps> {
 
     if (this.props.userType === "User") {
       return (
-
         <div className="grid grid-cols-6 items-center h-full bg-purple-500">
           <Link to="/users/home">
             <div className="bg-blue-500 w-32 ml-2 p-1">
@@ -39,7 +38,7 @@ export default class NavBarContainer extends React.Component<IProps> {
           </Link>
           <div className="col-span-3 flex flex-row justify-around p-2">
             <NavLink activeClassName="active" to="/users/modify">
-              <div className="rounded-md bg-purple-400 p-0.5">Update User Preferences</div>
+              <div className="rounded-md bg-purple-400 p-0.5">Update User</div>
             </NavLink>
             <NavLink activeClassName="active" to="/swipe">
               <div className="rounded-md bg-purple-400 p-0.5">Swipe</div>
@@ -49,7 +48,9 @@ export default class NavBarContainer extends React.Component<IProps> {
             </NavLink>
           </div>
           <div className="col-span-2 flex flex-row justify-around p-2">
-            <div className="rounded-md bg-purple-400 p-0.5">{this.props.user}</div>
+            <div className="rounded-md bg-purple-400 p-0.5">
+              {this.props.user}
+            </div>
             <Link to="/logout">
               <button
                 className="rounded-md bg-purple-400 p-0.5"
@@ -70,16 +71,18 @@ export default class NavBarContainer extends React.Component<IProps> {
             </div>
           </Link>
           <div className="col-span-3 flex flex-row justify-around p-2">
-            <NavLink activeClassName="active" to="/shelterDogs">
-              <div className="rounded-md bg-purple-400 p-0.5">My Dogs</div>
-            </NavLink>
             <NavLink activeClassName="active" to="/dog/new">
               <div className="rounded-md bg-purple-400 p-0.5">Add Dog</div>
+            </NavLink>
+            <NavLink activeClassName="active" to="/shelterDogs">
+              <div className="rounded-md bg-purple-400 p-0.5">My Dogs</div>
             </NavLink>
           </div>
           <div className="col-span-2 flex flex-row justify-around p-2">
             <NavLink activeClassName="active" to="/shelters/modify">
-              <div className="rounded-md bg-purple-400 p-0.5">{this.props.user}</div>
+              <div className="rounded-md bg-purple-400 p-0.5">
+                {this.props.user}
+              </div>
             </NavLink>
             <NavLink to="/logout">
               <button
