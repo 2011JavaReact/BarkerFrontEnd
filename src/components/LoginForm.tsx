@@ -43,7 +43,7 @@ export default class LoginForm extends React.Component<IProps> {
     event.preventDefault();
     if (this.state.userType === "User") {
       console.log(this.state);
-      Axios.post("http://localhost:8080/login", this.state.user)
+      Axios.post("http://54.215.186.163:8080/Barker-api/login", this.state.user)
         .then((resp) => {
           console.log(resp.data);
           this.setState({ redirect: true });
@@ -53,7 +53,7 @@ export default class LoginForm extends React.Component<IProps> {
           alert("Invalid login");
         });
     } else if (this.state.userType === "Shelter") {
-      Axios.post("http://localhost:8080/shelterLogin", {
+      Axios.post("http://54.215.186.163:8080/Barker-api/shelterLogin", {
         shelterName: this.state.user.email,
         shelterPassword: this.state.user.password,
       })

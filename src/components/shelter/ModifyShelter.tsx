@@ -19,7 +19,7 @@ export default class ModifyShelter extends React.Component<IProps> {
   };
 
   componentDidMount() {
-    Axios.get("http://localhost:8080/shelters/" + this.props.shelterId).then(
+    Axios.get("http://54.215.186.163:8080/Barker-api/shelters/" + this.props.shelterId).then(
       (resp) => {
         const newShelter: any = { ...this.state.shelter };
         newShelter.shelterName = resp.data.shelterName;
@@ -43,7 +43,7 @@ export default class ModifyShelter extends React.Component<IProps> {
   handleSubmit = (event: React.FormEvent<HTMLElement>): void | undefined => {
     event.preventDefault();
     console.log(this.state.shelter);
-    Axios.put("http://localhost:8080/shelters/update", this.state.shelter).then(
+    Axios.put("http://54.215.186.163:8080/Barker-api/update", this.state.shelter).then(
       (resp) => {
         this.setState({ redirect: true });
       }

@@ -39,7 +39,7 @@ export default class LikedDogs extends React.Component<IProps, IState> {
 
 
     getDogs = (): void => {
-          Axios.get("http://localhost:8080/users/" + this.props.userId).then((resp) => {
+          Axios.get("http://54.215.186.163:8080/Barker-api/users/" + this.props.userId).then((resp) => {
             //console.log(resp.data.dogs);
             resp.data.likedDogs.forEach( (value: dog) => {
                 //console.log(value.bio);

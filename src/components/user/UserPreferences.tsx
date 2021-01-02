@@ -55,7 +55,7 @@ export default class UserPreferences extends React.Component<
     event.preventDefault();
 
     Axios.put(
-      "http://localhost:8080/users/preferences",
+      "http://54.215.186.163:8080/Barker-api/users/preferences",
       this.state.preferences
     ).then((resp) => {
       this.setState({ redirect: true });
