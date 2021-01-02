@@ -68,7 +68,7 @@ export default class UserPreferences extends React.Component<
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/users/home",
             state: { userId: this.state.preferences.userId },
           }}
         />

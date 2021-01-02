@@ -13,6 +13,7 @@ export default class LoginForm extends React.Component<IProps> {
   state = {
     placeholderValue: "Email",
     redirect: false,
+    redirectTo: "/",
     userType: "User",
     message: "",
     user: {
@@ -49,6 +50,7 @@ export default class LoginForm extends React.Component<IProps> {
           console.log(resp.data);
           this.setState({ message: "Login Successful!" });
           setTimeout(() => this.setState({ redirect: true }), 2000);
+          this.setState({ redirect: true, redirectTo: "/users/home" });
           this.props.onLogin(resp.data.userName, resp.data.id, "User");
         })
         .catch((err) => {
@@ -64,6 +66,7 @@ export default class LoginForm extends React.Component<IProps> {
           this.setState({ message: "Login Successful!" });
           setTimeout(() => this.setState({ redirect: true }), 2000);
 
+          this.setState({ redirect: true, redirectTo: "/shelters/home" });
           this.props.onLogin(resp.data.shelterName, resp.data.id, "Shelter");
         })
         .catch((err) => {
@@ -77,7 +80,7 @@ export default class LoginForm extends React.Component<IProps> {
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: this.state.redirectTo,
           }}
         />
       );

@@ -108,7 +108,7 @@ export default class ModifyUser extends React.Component<
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/users/home",
             state: { userId: this.props.userId },
           }}
         />

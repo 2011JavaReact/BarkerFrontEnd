@@ -55,7 +55,7 @@ export default class NewUserForm extends React.Component<IProps> {
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/users/home",
             state: { userId: this.state.userId },
           }}
         />

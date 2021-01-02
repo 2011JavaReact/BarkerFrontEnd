@@ -31,7 +31,7 @@ export default class NavBarContainer extends React.Component<IProps> {
     if (this.props.userType === "User") {
       return (
         <div className="grid grid-cols-6 items-center h-full">
-          <Link to="/">
+          <Link to="/users/home">
             <div className="bg-blue-500 w-32 ml-2 p-1">
               <img src={logo} alt="Barker" />
             </div>
@@ -44,7 +44,7 @@ export default class NavBarContainer extends React.Component<IProps> {
               <div className="bg-blue-500">Swipe</div>
             </NavLink>
             <NavLink to="/liked">
-            <div className="bg-blue-500">Liked Dogs</div>
+              <div className="bg-blue-500">Liked Dogs</div>
             </NavLink>
           </div>
           <div className="col-span-2 flex flex-row justify-around p-2">
@@ -63,7 +63,7 @@ export default class NavBarContainer extends React.Component<IProps> {
     } else if (this.props.userType === "Shelter") {
       return (
         <div className="grid grid-cols-6 items-center h-full">
-          <Link to="/">
+          <Link to="/shelters/home">
             <div className="bg-blue-500 w-32 ml-2 p-1">
               <img src={logo} alt="Barker" />
             </div>

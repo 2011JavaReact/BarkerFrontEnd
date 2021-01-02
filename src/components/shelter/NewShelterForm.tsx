@@ -60,7 +60,7 @@ export default class NewShelterForm extends React.Component<IProps> {
         //   need to login and direct to new dog page
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/shelters/home",
             state: { shelterId: this.state.shelterId },
           }}
         />
