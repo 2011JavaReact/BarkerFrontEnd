@@ -10,6 +10,7 @@ export default class NewShelterForm extends React.Component<IProps> {
   state = {
     redirect: false,
     shelterId: "",
+    message: "",
     shelter: {
       shelterName: "",
       address: "",
@@ -39,7 +40,8 @@ export default class NewShelterForm extends React.Component<IProps> {
           .then((resp) => {
             console.log(resp.data);
             this.props.onCreate(resp.data.shelterName, resp.data.id, "Shelter");
-            this.setState({ redirect: true });
+            this.setState({ message: "Shelter Successfully Created!" });
+            setTimeout(() => this.setState({ redirect: true }), 2000);
           })
           .catch((err) => {
             console.log(err);
@@ -65,58 +67,61 @@ export default class NewShelterForm extends React.Component<IProps> {
       );
     } else {
       return (
-        <div className="flex h-screen justify-center">
-          <div className="m-12 w-30% ">
-            <div className="text-3xl">Create New Shelter</div>
-            <form className="flex flex-col" onSubmit={this.handleSubmit}>
-              <input
-                className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
-                type="text"
-                name="shelterName"
-                required
-                placeholder="Shelter Name"
-                onChange={this.handleChange}
-                value={this.state.shelter.shelterName}
-              ></input>
-              <input
-                className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
-                type="text"
-                name="address"
-                required
-                placeholder="Address"
-                onChange={this.handleChange}
-                value={this.state.shelter.address}
-              ></input>
-              <input
-                className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
-                type="text"
-                name="contactInfo"
-                required
-                placeholder="Contact Information"
-                onChange={this.handleChange}
-                value={this.state.shelter.contactInfo}
-              ></input>
-              <input
-                className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
-                type="password"
-                name="shelterPassword"
-                required
-                placeholder="Password"
-                onChange={this.handleChange}
-                value={this.state.shelter.shelterPassword}
-              ></input>
-              <button
-                className="text-2xl rounded-full py-2 px-2 bg-red-400"
-                type="submit"
-              >
-                Sign Up!
-              </button>
-            </form>
-            <Link className="text-2xl" to="/users/new">
-              Create a User Account Instead
-            </Link>
+        <>
+          <div className="text-green-400 text-4xl">{this.state.message}</div>
+          <div className="flex h-screen justify-center">
+            <div className="m-12 w-30% ">
+              <div className="text-3xl">Create New Shelter</div>
+              <form className="flex flex-col" onSubmit={this.handleSubmit}>
+                <input
+                  className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
+                  type="text"
+                  name="shelterName"
+                  required
+                  placeholder="Shelter Name"
+                  onChange={this.handleChange}
+                  value={this.state.shelter.shelterName}
+                ></input>
+                <input
+                  className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
+                  type="text"
+                  name="address"
+                  required
+                  placeholder="Address"
+                  onChange={this.handleChange}
+                  value={this.state.shelter.address}
+                ></input>
+                <input
+                  className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
+                  type="text"
+                  name="contactInfo"
+                  required
+                  placeholder="Contact Information"
+                  onChange={this.handleChange}
+                  value={this.state.shelter.contactInfo}
+                ></input>
+                <input
+                  className="m-2 p-2 rounded-md border-solid border-2 border-gray-400 text-left"
+                  type="password"
+                  name="shelterPassword"
+                  required
+                  placeholder="Password"
+                  onChange={this.handleChange}
+                  value={this.state.shelter.shelterPassword}
+                ></input>
+                <button
+                  className="text-2xl rounded-full py-2 px-2 bg-red-400"
+                  type="submit"
+                >
+                  Sign Up!
+                </button>
+              </form>
+              <Link className="text-2xl" to="/users/new">
+                Create a User Account Instead
+              </Link>
+            </div>
           </div>
-        </div>
+        </>
       );
     }
   }
