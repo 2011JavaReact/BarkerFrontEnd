@@ -36,20 +36,18 @@ export default class LikedDogs extends React.Component<IProps, IState> {
     alert("Not implemented yet");
   };
 
-  getDogs = (): void => {
-    Axios.get("http://localhost:8080/users/" + this.props.userId)
-      .then((resp) => {
-        //console.log(resp.data.dogs);
-        resp.data.likedDogs.forEach((value: dog) => {
-          //console.log(value.bio);
-          this.state.dogs.push(value);
-        });
-        this.setState({ dogs: this.state.dogs });
-      })
-      .catch((err) => {
-        alert("There was an error getting the dogs");
-      });
-  };
+
+    getDogs = (): void => {
+          Axios.get("http://54.215.186.163:8080/Barker-api/users/" + this.props.userId).then((resp) => {
+            //console.log(resp.data.dogs);
+            resp.data.likedDogs.forEach( (value: dog) => {
+                //console.log(value.bio);
+                this.state.dogs.push(value);
+            })
+            this.setState({dogs: this.state.dogs});
+          }).catch(err => {alert("There was an error getting the dogs")});
+        
+    }
 
   render(): React.ReactNode {
     return (

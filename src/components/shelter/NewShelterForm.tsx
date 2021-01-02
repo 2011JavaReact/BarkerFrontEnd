@@ -31,12 +31,12 @@ export default class NewShelterForm extends React.Component<IProps> {
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
     console.log(this.state);
-    Axios.post("http://localhost:8080/shelters", this.state.shelter)
+    Axios.post("http://54.215.186.163:8080/Barker-api/shelters", this.state.shelter)
       .then((resp) => {
         console.log(resp.data);
         this.setState({ shelterId: resp.data.id });
         console.log(this.state.shelter);
-        Axios.post("http://localhost:8080/shelterLogin", this.state.shelter)
+        Axios.post("http://54.215.186.163:8080/Barker-api/shelterLogin", this.state.shelter)
           .then((resp) => {
             console.log(resp.data);
             this.props.onCreate(resp.data.shelterName, resp.data.id, "Shelter");

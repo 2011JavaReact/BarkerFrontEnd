@@ -31,10 +31,10 @@ export default class NewUserForm extends React.Component<IProps> {
   handleSubmit = (event: React.FormEvent<HTMLElement>) => {
     event.preventDefault();
 
-    Axios.post("http://localhost:8080/users", this.state.user)
+    Axios.post("http://54.215.186.163:8080/Barker-api/users", this.state.user)
       .then((resp) => {
         this.setState({ userId: resp.data.id });
-        Axios.post("http://localhost:8080/login", this.state.user)
+        Axios.post("http://54.215.186.163:8080/Barker-api/login", this.state.user)
           .then((resp) => {
             this.setState({ message: "User Account Successfully Created!" });
             setTimeout(() => this.setState({ redirect: true }), 2000);
