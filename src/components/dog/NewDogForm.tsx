@@ -58,7 +58,7 @@ export default class NewDogForm extends React.Component<IProps> {
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/shelters/home",
             state: { dogId: this.state.dogId },
           }}
         />

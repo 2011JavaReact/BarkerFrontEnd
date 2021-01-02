@@ -13,6 +13,7 @@ export default class LoginForm extends React.Component<IProps> {
   state = {
     placeholderValue: "Email",
     redirect: false,
+    redirectTo: "/",
     userType: "User",
     user: {
       email: "",
@@ -46,7 +47,7 @@ export default class LoginForm extends React.Component<IProps> {
       Axios.post("http://localhost:8080/login", this.state.user)
         .then((resp) => {
           console.log(resp.data);
-          this.setState({ redirect: true });
+          this.setState({ redirect: true, redirectTo: "/users/home" });
           this.props.onLogin(resp.data.userName, resp.data.id, "User");
         })
         .catch((err) => {
@@ -59,7 +60,7 @@ export default class LoginForm extends React.Component<IProps> {
       })
         .then((resp) => {
           console.log(resp.data);
-          this.setState({ redirect: true });
+          this.setState({ redirect: true, redirectTo: "/shelters/home" });
           this.props.onLogin(resp.data.shelterName, resp.data.id, "Shelter");
         })
         .catch((err) => {
@@ -73,7 +74,7 @@ export default class LoginForm extends React.Component<IProps> {
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: this.state.redirectTo,
           }}
         />
       );

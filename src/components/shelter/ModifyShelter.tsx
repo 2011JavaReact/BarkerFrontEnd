@@ -55,7 +55,7 @@ export default class ModifyShelter extends React.Component<IProps> {
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: "/shelters/home",
             state: { shelterId: this.state.shelter.id },
           }}
         />
