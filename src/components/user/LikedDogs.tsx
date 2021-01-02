@@ -3,39 +3,38 @@ import { Redirect, RouteComponentProps, Link } from "react-router-dom";
 import Axios from "axios";
 
 interface IProps {
-    userId: number;
-  }
-interface IState{
+  userId: number;
+}
+interface IState {
   dogs: Array<dog>;
 }
-interface dog{
-    id: number,
-    name: string,
-    age: string,
-    breed: string,
-    image: string,
-    sex: string,
-    location: string,
-    sheddingLevel: string,
-    energyLevel: string,
-    bio: string,
-    adopted: boolean,
-    shelterId: number
+interface dog {
+  id: number;
+  name: string;
+  age: string;
+  breed: string;
+  image: string;
+  sex: string;
+  location: string;
+  sheddingLevel: string;
+  energyLevel: string;
+  bio: string;
+  adopted: boolean;
+  shelterId: number;
 }
-
 
 export default class LikedDogs extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      dogs: []
-    }
+      dogs: [],
+    };
     this.getDogs();
   }
 
-    unLikeDog = (): void => {
-      alert("Not implemented yet");
-    }
+  unLikeDog = (): void => {
+    alert("Not implemented yet");
+  };
 
 
     getDogs = (): void => {
@@ -51,25 +50,34 @@ export default class LikedDogs extends React.Component<IProps, IState> {
     }
 
   render(): React.ReactNode {
-    return(
-        <div>
-        {this.state.dogs.map(({name, image, age, sex, adopted}) => (
-          <div>
-            <p>{name}, {age}, {sex}, {adopted.toString()}</p>
+    return (
+      <div>
+        {this.state.dogs.length < 1 ? (
+          <p className="text-purple-600 text-3xl">
+            No Liked Dogs Yet - Select "Swipe" to view and "Like" dogs!
+          </p>
+        ) : null}
+        {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
+          <div key={id}>
+            <p>
+              {name}, {age}, {sex}, {adopted.toString()}
+            </p>
             <img
-                width="200"
-                height="100"
-                src={image}
-                alt={"Picture Unavailable"}
-              />
-              <button className="text-2xl rounded-full py-2 px-2 bg-red-400" onClick={this.unLikeDog}>
-                Unlike Dog
-                </button>
+              width="200"
+              height="100"
+              src={image}
+              alt={"Picture Unavailable"}
+            />
+            <button
+              className="text-2xl rounded-full py-2 px-2 bg-red-400"
+              onClick={this.unLikeDog}
+            >
+              Unlike Dog
+            </button>
             <p> ------------------------- </p>
-            </div>         
+          </div>
         ))}
-        </div>
+      </div>
     );
+  }
 }
-}
-
