@@ -62,7 +62,7 @@ export default class ModifyUser extends React.Component<
   componentDidMount() {
     // Need to get userId from props and enter here...
     axios
-      .get("http://54.215.186.163:8080/Barker-api/users" + this.props.userId)
+      .get("http://54.215.186.163:8080/Barker-api/users/" + this.props.userId)
       .then((resp) => {
         const newUser: any = { ...this.state.user };
         newUser.userId = resp.data.id;
@@ -79,10 +79,12 @@ export default class ModifyUser extends React.Component<
 
         this.setState({ user: newUser });
 
-        axios.get("http://54.215.186.163:8080/Barker-api/dogs/breeds").then((resp) => {
-          const sortedBreeds = resp.data.sort();
-          this.setState({ breeds: sortedBreeds });
-        });
+        axios
+          .get("http://54.215.186.163:8080/Barker-api/dogs/breeds")
+          .then((resp) => {
+            const sortedBreeds = resp.data.sort();
+            this.setState({ breeds: sortedBreeds });
+          });
       });
   }
 
@@ -95,12 +97,13 @@ export default class ModifyUser extends React.Component<
   handleSubmit = (event: React.FormEvent<HTMLElement>): void | undefined => {
     event.preventDefault();
 
-    Axios.put("http://54.215.186.163:8080/Barker-api/users/update", this.state.user).then(
-      (resp) => {
-        this.setState({ message: "User Account Successfully Updated!" });
-        setTimeout(() => this.setState({ redirect: true }), 2000);
-      }
-    );
+    Axios.put(
+      "http://54.215.186.163:8080/Barker-api/users/update",
+      this.state.user
+    ).then((resp) => {
+      this.setState({ message: "User Account Successfully Updated!" });
+      setTimeout(() => this.setState({ redirect: true }), 2000);
+    });
   };
 
   render(): React.ReactNode {

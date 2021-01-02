@@ -11,7 +11,7 @@ const UserHome = () => {
         <p className="m-2">Start by updating your preferences if desired.</p>
         <Link to="/users/modify">
           <button className="text-3xl rounded-full py-3 px-3 bg-purple-300">
-            Select Preferences
+            Select Dog Preferences
           </button>
         </Link>
       </div>

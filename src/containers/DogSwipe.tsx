@@ -59,10 +59,11 @@ export default class DogSwipe extends React.Component<
 
   componentDidMount() {
     Axios.get(
-      "http://54.215.186.163:8080/Barker-api/users/" + this.state.userId + "/dogs"
+      "http://54.215.186.163:8080/Barker-api/users/" +
+        this.state.userId +
+        "/dogs"
     ).then((resp) => {
       this.setState({ dogArray: resp.data });
-      console.log(resp.data);
       if (this.state.dogArray.length > 0) {
         this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
       }
@@ -110,13 +111,11 @@ export default class DogSwipe extends React.Component<
       "https://dog.ceo/api/breed/" + newArray.join("-") + "/images/random"
     )
       .then((resp) => {
-        console.log(resp.data);
         this.setState({ dogImage: resp.data.message });
         // this.setState({ currentDog: (this.state.currentDog += 1) });
       })
       .catch((err) => {
         Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
-          console.log(resp.data);
           this.setState({ dogImage: resp.data.message });
           // this.setState({ currentDog: (this.state.currentDog += 1) });
         });
