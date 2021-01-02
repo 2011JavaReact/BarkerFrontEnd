@@ -16,6 +16,7 @@ interface IProps {
     name: string;
     sex: string;
     sheddingLevel: string;
+    shelter: string;
     shelterId: number;
   };
 }
@@ -70,7 +71,7 @@ const DogCard: React.FC<IProps> = (props) => {
           </div>
 
           <div className="text-left text-xl font-semibold text-gray-700">
-            Located in Shelter #: {props.dogObject.shelterId}
+            Located at Shelter: {props.dogObject.shelter}
           </div>
         </div>
       </div>

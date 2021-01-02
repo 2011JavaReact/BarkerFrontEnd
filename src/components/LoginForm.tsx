@@ -13,7 +13,9 @@ export default class LoginForm extends React.Component<IProps> {
   state = {
     placeholderValue: "Email",
     redirect: false,
+    redirectTo: "/",
     userType: "User",
+    message: "",
     user: {
       email: "",
       password: "",
@@ -46,7 +48,9 @@ export default class LoginForm extends React.Component<IProps> {
       Axios.post("http://54.215.186.163:8080/Barker-api/login", this.state.user)
         .then((resp) => {
           console.log(resp.data);
-          this.setState({ redirect: true });
+          this.setState({ message: "Login Successful!" });
+          setTimeout(() => this.setState({ redirect: true }), 2000);
+          this.setState({ redirect: true, redirectTo: "/users/home" });
           this.props.onLogin(resp.data.userName, resp.data.id, "User");
         })
         .catch((err) => {
@@ -59,7 +63,10 @@ export default class LoginForm extends React.Component<IProps> {
       })
         .then((resp) => {
           console.log(resp.data);
-          this.setState({ redirect: true });
+          this.setState({ message: "Login Successful!" });
+          setTimeout(() => this.setState({ redirect: true }), 2000);
+
+          this.setState({ redirect: true, redirectTo: "/shelters/home" });
           this.props.onLogin(resp.data.shelterName, resp.data.id, "Shelter");
         })
         .catch((err) => {
@@ -73,7 +80,7 @@ export default class LoginForm extends React.Component<IProps> {
       return (
         <Redirect
           to={{
-            pathname: "/",
+            pathname: this.state.redirectTo,
           }}
         />
       );
@@ -81,6 +88,7 @@ export default class LoginForm extends React.Component<IProps> {
       return (
         <div className="flex h-screen justify-center">
           <div className="m-12 w-30% ">
+            <div className="text-green-400 text-4xl">{this.state.message}</div>
             <div className="text-3xl">Welcome Bark!</div>
             <form className="flex flex-col" onSubmit={this.handleSubmit}>
               <input
