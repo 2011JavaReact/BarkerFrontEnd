@@ -71,7 +71,7 @@ class App extends React.Component<IProps, IState> {
               onLogout={this.onLogout.bind(this)}
             ></NavBarContainer>
           </nav>
-          <div className="main-container h-screen mt-12 mb-10">
+          <div className="main-container min-h-screen mt-12 mb-12">
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/users/home" component={UserHome} />

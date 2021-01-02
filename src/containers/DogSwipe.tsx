@@ -165,7 +165,7 @@ export default class DogSwipe extends React.Component<
   render() {
     return (
       <div>
-        <div className="bg-gray-200 p-4 h-screen mx-auto">
+        <div className="bg-gray-200 p-4 min-h-screen mx-auto">
           <h1>Swipe Through Available Dogs!</h1>
           <div>{this.getDogCard()}</div>
         </div>
