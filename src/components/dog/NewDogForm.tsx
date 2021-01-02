@@ -46,7 +46,7 @@ export default class NewDogForm extends React.Component<IProps> {
     event.preventDefault();
     console.log(this.state);
     Axios.post(
-      "http://localhost:8080/shelters/" + this.state.shelterId + "/dogs",
+      "http://54.215.186.163:8080/Barker-api/shelters/" + this.state.shelterId + "/dogs",
       this.state.dog
     ).then((resp) => {
       console.log(resp.data);

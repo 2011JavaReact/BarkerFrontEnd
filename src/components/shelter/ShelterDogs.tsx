@@ -39,7 +39,7 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
 
 
     getDogs = (): void => {
-          Axios.get("http://localhost:8080/shelters/" + this.props.shelterId).then((resp) => {
+          Axios.get("http://54.215.186.163:8080/Barker-api/shelters/" + this.props.shelterId).then((resp) => {
             //console.log(resp.data.dogs);
             resp.data.dogs.forEach( (value: dog) => {
                 //console.log(value.bio);

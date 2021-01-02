@@ -59,7 +59,7 @@ export default class DogSwipe extends React.Component<
 
   componentDidMount() {
     Axios.get(
-      "http://localhost:8080/users/" + this.state.userId + "/dogs"
+      "http://54.215.186.163:8080/Barker-api/users/" + this.state.userId + "/dogs"
     ).then((resp) => {
       this.setState({ dogArray: resp.data });
       console.log(resp.data);
@@ -71,7 +71,7 @@ export default class DogSwipe extends React.Component<
 
   handleLike = (dogId: number) => {
     Axios.get(
-      "http://localhost:8080/users/" +
+      "http://54.215.186.163:8080/Barker-api/users/" +
         this.state.userId +
         "/dogs/" +
         dogId +
@@ -85,7 +85,7 @@ export default class DogSwipe extends React.Component<
 
   handleDislike = (dogId: number) => {
     Axios.get(
-      "http://localhost:8080/users/" +
+      "http://54.215.186.163:8080/Barker-api/users/" +
         this.state.userId +
         "/dogs/" +
         dogId +
