@@ -17,6 +17,8 @@ import ModifyUser from "./components/user/ModifyUser";
 import ModifyShelter from "./components/shelter/ModifyShelter";
 import ShelterDogs from "./components/shelter/ShelterDogs";
 import LikedDogs from "./components/user/LikedDogs";
+import UserHome from "./components/UserHome";
+import ShelterHome from "./components/ShelterHome";
 
 interface IProps {}
 
@@ -72,6 +74,8 @@ class App extends React.Component<IProps, IState> {
           <div className="main-container h-screen mt-12 mb-10">
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/users/home" component={UserHome} />
+              <Route exact path="/shelters/home" component={ShelterHome} />
               <Route
                 exact
                 path="/users/new"
@@ -118,8 +122,8 @@ class App extends React.Component<IProps, IState> {
                 render={(routerProps) => <UserPreferences {...routerProps} />}
               />
 
-              <Route exact path="/dog" component={NewDogForm} />
-              <Route exact path="/dogs" component={DogCard} />
+              {/* <Route exact path="/dog" component={NewDogForm} />
+              <Route exact path="/dogs" component={DogCard} /> */}
 
               <Route
                 exact
@@ -142,13 +146,13 @@ class App extends React.Component<IProps, IState> {
                   <NewDogForm {...routerProps} shelterId={this.state.id} />
                 )}
               />
-            <Route
-              exact
-              path="/liked"
-              render={(routerProps) => (
-                <LikedDogs {...routerProps} userId={this.state.id} />
-              )}
-            />
+              <Route
+                exact
+                path="/liked"
+                render={(routerProps) => (
+                  <LikedDogs {...routerProps} userId={this.state.id} />
+                )}
+              />
               <Route
                 exact
                 path="/shelterDogs"
