@@ -19,6 +19,7 @@ interface dog {
   name: string;
   sex: string;
   sheddingLevel: string;
+  shelter: string;
   shelterId: number;
 }
 
@@ -49,6 +50,7 @@ export default class DogSwipe extends React.Component<
         name: "",
         sex: "",
         sheddingLevel: "",
+        shelter: "",
         shelterId: 0,
       },
     ],
