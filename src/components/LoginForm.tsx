@@ -44,10 +44,8 @@ export default class LoginForm extends React.Component<IProps> {
   handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
     event.preventDefault();
     if (this.state.userType === "User") {
-      console.log(this.state);
       Axios.post("http://localhost:8080/login", this.state.user)
         .then((resp) => {
-          console.log(resp.data);
           this.setState({ message: "Login Successful!" });
           setTimeout(() => this.setState({ redirect: true }), 2000);
           this.setState({ redirect: true, redirectTo: "/users/home" });
@@ -62,7 +60,6 @@ export default class LoginForm extends React.Component<IProps> {
         shelterPassword: this.state.user.password,
       })
         .then((resp) => {
-          console.log(resp.data);
           this.setState({ message: "Login Successful!" });
           setTimeout(() => this.setState({ redirect: true }), 2000);
 
