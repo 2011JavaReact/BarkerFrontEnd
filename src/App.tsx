@@ -17,6 +17,7 @@ import ShelterDogs from "./components/shelter/ShelterDogs";
 import LikedDogs from "./components/user/LikedDogs";
 import UserHome from "./components/UserHome";
 import ShelterHome from "./components/ShelterHome";
+import EditDogForm from "./components/dog/EditDogForm";
 
 interface IProps {}
 
@@ -139,6 +140,14 @@ class App extends React.Component<IProps, IState> {
                   <NewDogForm {...routerProps} shelterId={this.state.id} />
                 )}
               />
+
+              <Route
+              exact
+              path="/dog/modify"
+              render={(routerProps) => (
+                <EditDogForm {...routerProps} shelterId={this.state.id} />
+              )}
+            />
               <Route
                 exact
                 path="/liked"

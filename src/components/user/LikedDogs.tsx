@@ -32,6 +32,11 @@ export default class LikedDogs extends React.Component<IProps, IState> {
     this.getDogs();
   }
 
+  getAdoptedText = (adopted: boolean): string =>
+  {
+    return adopted ? "Adopted" : "Available";
+  }
+
   unLikeDog = (dogID: number): void => {
     Axios.get("http://54.215.186.163:8080/Barker-api/users/" + this.props.userId + "/dogs/" + dogID + "/unlike").then((resp) => {
     this.setState({dogs: []});      
@@ -63,7 +68,7 @@ export default class LikedDogs extends React.Component<IProps, IState> {
         {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
           <div key={id}>
             <p>
-              {id}, {name}, {age}, {sex}, {adopted.toString()}
+              {id}, {name}, {age}, {sex}, {this.getAdoptedText(adopted)}
             </p>
             <img
               width="200"
