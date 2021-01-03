@@ -32,9 +32,12 @@ export default class LikedDogs extends React.Component<IProps, IState> {
     this.getDogs();
   }
 
-  unLikeDog = (): void => {
-    alert("Not implemented yet");
-  };
+  unLikeDog = (dogID: number): void => {
+    Axios.get("http://54.215.186.163:8080/Barker-api/users/" + this.props.userId + "/dogs/" + dogID + "/unlike").then((resp) => {
+    this.setState({dogs: []});      
+    this.getDogs();
+        }).catch(err => {alert("There was an error unliking the dog")});
+  }
 
 
     getDogs = (): void => {
@@ -60,7 +63,7 @@ export default class LikedDogs extends React.Component<IProps, IState> {
         {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
           <div key={id}>
             <p>
-              {name}, {age}, {sex}, {adopted.toString()}
+              {id}, {name}, {age}, {sex}, {adopted.toString()}
             </p>
             <img
               width="200"
@@ -70,7 +73,7 @@ export default class LikedDogs extends React.Component<IProps, IState> {
             />
             <button
               className="text-2xl rounded-full py-2 px-2 bg-red-400"
-              onClick={this.unLikeDog}
+              onClick={this.unLikeDog.bind(this,id)}
             >
               Unlike Dog
             </button>
