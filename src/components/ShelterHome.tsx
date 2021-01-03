@@ -18,7 +18,7 @@ const ShelterHome = () => {
         </Link>
       </div>
       <div className="rounded-xl p-2 m-2">
-        <p className="m-2">Review and update your existing dogs</p>
+        <p className="m-2">Review and update your existing dogs.</p>
 
         <Link to="/shelterDogs">
           <button className="text-3xl rounded-full py-3 px-3 bg-green-300">
@@ -27,7 +27,7 @@ const ShelterHome = () => {
         </Link>
       </div>
       <div className="rounded-xl p-2 m-2">
-        <p className="m-2">Update Shelter Information</p>
+        <p className="m-2">Update Shelter Information.</p>
         <Link to="/shelters/modify">
           <button className="text-3xl rounded-full py-3 px-3 bg-green-300">
             Update Shelter
