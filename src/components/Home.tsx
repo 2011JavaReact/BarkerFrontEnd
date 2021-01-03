@@ -30,7 +30,7 @@ const Home = () => {
         </Link>
         {/* <div className="bg-happy-dog bg-opacity-10 bg-no-repeat bg-center bg-contain rounded-lg mt-2 h-600"></div> */}
         <img
-          className="mt-2 p-12 w-screen max-w-screen-lg mx-auto rounded-lg"
+          className="mt-4 w-screen max-w-screen-lg mx-auto rounded-xl"
           src={happyDog}
           alt="Dog and Family"
         />
