@@ -32,11 +32,9 @@ const DogCard: React.FC<IProps> = (props) => {
   };
 
   const getDogImage = (): string => {
-    if(props.dogObject.image == "Dog Image")
-    {
+    if (props.dogObject.image === "Dog Image") {
       return props.dogImage;
-    }
-    else{
+    } else {
       return props.dogObject.image;
     }
   };
