@@ -25,7 +25,7 @@ interface dog {
 
 interface IState {
   userId: number;
-  dogImage: string;
+  // dogImage: string;
   dogArray: Array<dog>;
   currentDog: number;
 }
@@ -36,7 +36,7 @@ export default class DogSwipe extends React.Component<
 > {
   state = {
     userId: this.props.userId,
-    dogImage: "",
+    // dogImage: "",
     dogArray: [
       {
         adopted: false,
@@ -64,9 +64,9 @@ export default class DogSwipe extends React.Component<
         "/dogs"
     ).then((resp) => {
       this.setState({ dogArray: resp.data });
-      if (this.state.dogArray.length > 0) {
-        this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
-      }
+      // if (this.state.dogArray.length > 0) {
+      //   this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
+      // }
     });
   }
 
@@ -98,36 +98,36 @@ export default class DogSwipe extends React.Component<
     });
   };
 
-  getDogImage = (dogBreed: string) => {
-    // get random image -TODO: TIE TO SPECIFIC BREED!!!
-    const urlArray = dogBreed.split(" ");
-    const newArray: Array<string> = [];
+  // getDogImage = (dogBreed: string) => {
+  //   // get random image -TODO: TIE TO SPECIFIC BREED!!!
+  //   const urlArray = dogBreed.split(" ");
+  //   const newArray: Array<string> = [];
 
-    for (let i = urlArray.length - 1; i >= 0; i--) {
-      newArray.push(urlArray[i].toLowerCase());
-    }
+  //   for (let i = urlArray.length - 1; i >= 0; i--) {
+  //     newArray.push(urlArray[i].toLowerCase());
+  //   }
 
-    Axios.get(
-      "https://dog.ceo/api/breed/" + newArray.join("-") + "/images/random"
-    )
-      .then((resp) => {
-        this.setState({ dogImage: resp.data.message });
-        // this.setState({ currentDog: (this.state.currentDog += 1) });
-      })
-      .catch((err) => {
-        Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
-          this.setState({ dogImage: resp.data.message });
-          // this.setState({ currentDog: (this.state.currentDog += 1) });
-        });
-      });
-  };
+  //   Axios.get(
+  //     "https://dog.ceo/api/breed/" + newArray.join("-") + "/images/random"
+  //   )
+  //     .then((resp) => {
+  //       this.setState({ dogImage: resp.data.message });
+  //       // this.setState({ currentDog: (this.state.currentDog += 1) });
+  //     })
+  //     .catch((err) => {
+  //       Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
+  //         this.setState({ dogImage: resp.data.message });
+  //         // this.setState({ currentDog: (this.state.currentDog += 1) });
+  //       });
+  //     });
+  // };
 
   getDogObjectReady = () => {
     if (
       this.state.currentDog + 1 < this.state.dogArray.length &&
       this.state.dogArray.length > 0
     ) {
-      this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
+      //this.getDogImage(this.state.dogArray[this.state.currentDog].breed);
     } else {
       return (
         <p>
@@ -145,7 +145,7 @@ export default class DogSwipe extends React.Component<
     ) {
       return (
         <DogCard
-          dogImage={this.state.dogImage}
+          // dogImage={[this.state.currentDog].}
           returnLike={this.handleLike}
           returnDislike={this.handleDislike}
           dogObject={this.state.dogArray[this.state.currentDog]}

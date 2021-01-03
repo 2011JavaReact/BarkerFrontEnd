@@ -1,7 +1,7 @@
 import React from "react";
 
 interface IProps {
-  dogImage: string;
+  // dogImage: string;
   returnLike: Function;
   returnDislike: Function;
   dogObject: {
@@ -42,8 +42,8 @@ const DogCard: React.FC<IProps> = (props) => {
       <div className="flex-none w-10/12 bg-gradient-to-br from-gray-400 to-purple-400 rounded-xl mx-auto p-2">
         <div className="mx-auto">
           <img
-            src={props.dogImage}
-            alt="Dog"
+            src={props.dogObject.image}
+            alt="Picture Unavailable"
             className="mx-auto w-10/12 rounded-xl"
           />
         </div>
