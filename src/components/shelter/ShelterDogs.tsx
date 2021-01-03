@@ -32,9 +32,14 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
     this.getDogs();
   }
 
-  editDog = (): void => {
-    alert("Not implemented yet");
-  };
+  editDog = (dogId: number): void => {
+    localStorage.setItem("dogId", dogId.toString());
+  }
+
+  getAdoptedText = (adopted: boolean): string =>
+  {
+    return adopted ? "Adopted" : "Available";
+  }
 
   getDogs = (): void => {
     Axios.get(
@@ -66,7 +71,7 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
         {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
           <div key={id}>
             <p>
-              {name}, {age}, {sex}, {adopted.toString()}
+              {name}, {age}, {sex}, {this.getAdoptedText(adopted)}
             </p>
             <img
               width="200"
@@ -74,12 +79,11 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
               src={image}
               alt={"Picture Unavailable"}
             />
-            <button
-              className="text-2xl rounded-full py-2 px-2 bg-red-400"
-              onClick={this.editDog}
-            >
-              Edit Dog
-            </button>
+              <Link to="/dog/modify">
+              <button className="text-2xl rounded-full py-2 px-2 bg-red-400" onClick={this.editDog.bind(this, id)}>
+                Edit Dog
+              </button>
+              </Link>
             <p> ------------------------- </p>
           </div>
         ))}
