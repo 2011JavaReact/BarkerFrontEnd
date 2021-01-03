@@ -1,4 +1,5 @@
 import React from "react";
+import { isConstructorDeclaration } from "typescript";
 
 interface IProps {
   dogImage: string;
@@ -30,6 +31,14 @@ const DogCard: React.FC<IProps> = (props) => {
     props.returnDislike(props.dogObject.id);
   };
 
+  const getDogImage = (): string => {
+    if (props.dogObject.image === "Dog Image") {
+      return props.dogImage;
+    } else {
+      return props.dogObject.image;
+    }
+  };
+
   return (
     // <div className="flex bg-gray-200 p-8 justify-center h-screen max-h-96 align-middle">
     <div className="flex w-11/12 bg-gradient-to-br from-gray-600 to-purple-600 rounded-xl max-w-screen-lg mx-auto p-2">
@@ -42,8 +51,9 @@ const DogCard: React.FC<IProps> = (props) => {
       <div className="flex-none w-10/12 bg-gradient-to-br from-gray-400 to-purple-400 rounded-xl mx-auto p-2">
         <div className="mx-auto">
           <img
-            src={props.dogImage}
-            alt="Dog"
+            // src={props.dogObject.image}
+            src={getDogImage()}
+            alt="Picture Unavailable"
             className="mx-auto w-10/12 rounded-xl"
           />
         </div>

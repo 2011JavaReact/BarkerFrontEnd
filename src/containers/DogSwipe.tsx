@@ -78,7 +78,6 @@ export default class DogSwipe extends React.Component<
         dogId +
         "/like"
     ).then((resp) => {
-      // this.getDogImage();
       this.setState({ currentDog: this.state.currentDog + 1 });
       this.getDogObjectReady();
     });
@@ -92,14 +91,13 @@ export default class DogSwipe extends React.Component<
         dogId +
         "/dislike"
     ).then((resp) => {
-      // this.getDogImage();
       this.setState({ currentDog: this.state.currentDog + 1 });
       this.getDogObjectReady();
     });
   };
 
   getDogImage = (dogBreed: string) => {
-    // get random image -TODO: TIE TO SPECIFIC BREED!!!
+    // get random image in case database doesn't have an image link
     const urlArray = dogBreed.split(" ");
     const newArray: Array<string> = [];
 
@@ -111,13 +109,12 @@ export default class DogSwipe extends React.Component<
       "https://dog.ceo/api/breed/" + newArray.join("-") + "/images/random"
     )
       .then((resp) => {
+        this.setState({});
         this.setState({ dogImage: resp.data.message });
-        // this.setState({ currentDog: (this.state.currentDog += 1) });
       })
       .catch((err) => {
         Axios.get("https://dog.ceo/api/breeds/image/random").then((resp) => {
           this.setState({ dogImage: resp.data.message });
-          // this.setState({ currentDog: (this.state.currentDog += 1) });
         });
       });
   };

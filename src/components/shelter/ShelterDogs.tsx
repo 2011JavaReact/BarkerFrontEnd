@@ -68,12 +68,15 @@ export default class ShelterDogs extends React.Component<IProps, IState> {
             No Dogs Yet - Select "Add Dog" to add your available dogs!
           </p>
         ) : null}
-        {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
+        {this.state.dogs.map(({ id, name, image, age, sex, adopted, sheddingLevel,energyLevel, bio }) => (
           <div key={id}>
             <p>
               {name}, {age}, {sex}, {this.getAdoptedText(adopted)}
             </p>
-            <img
+            <p>Shedding Level: {sheddingLevel}</p>
+            <p>Energy Level: {energyLevel}</p>
+            <p>{bio}</p>
+            <img className="object-center mx-auto"
               width="200"
               height="100"
               src={image}

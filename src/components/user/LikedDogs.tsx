@@ -19,6 +19,7 @@ interface dog {
   sheddingLevel: string;
   energyLevel: string;
   bio: string;
+  shelter: string;
   adopted: boolean;
   shelterId: number;
 }
@@ -65,12 +66,16 @@ export default class LikedDogs extends React.Component<IProps, IState> {
             No Liked Dogs Yet - Select "Swipe" to view and "Like" dogs!
           </p>
         ) : null}
-        {this.state.dogs.map(({ id, name, image, age, sex, adopted }) => (
+        {this.state.dogs.map(({ id, name, image, age, sex, adopted, shelter, sheddingLevel, energyLevel, bio }) => (
           <div key={id}>
             <p>
               {id}, {name}, {age}, {sex}, {this.getAdoptedText(adopted)}
             </p>
-            <img
+            <p>Located at {shelter}</p>
+            <p>Shedding Level: {sheddingLevel}</p>
+            <p>Energy Level: {energyLevel}</p>
+            <p>{bio}</p>
+            <img className="object-center mx-auto"
               width="200"
               height="100"
               src={image}
